@@ -73,7 +73,10 @@
     <nav class="bg-white border-b border-slate-100 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('shelf')">
-                <span class="bg-indigo-600 text-white font-black px-3 py-1.5 rounded-xl text-xl header-font shadow-md tracking-wider">ET</span>
+                <img src="https://raw.githubusercontent.com/EdukasaunTimor/stories/main/EdukasaunTimor%20logo.png" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/128x128/4f46e5/ffffff?text=ET';" 
+                     alt="EdukasaunTimor Logo" 
+                     class="w-10 h-10 object-contain rounded-xl shadow-sm border border-slate-100 p-0.5">
                 <div>
                     <h1 class="font-black text-sm md:text-base header-font tracking-tight text-slate-900">EdukasaunTimor.org</h1>
                     <p class="text-[10px] text-indigo-600 uppercase tracking-widest font-bold">Digital Library</p>
@@ -275,107 +278,10 @@
     <footer class="bg-slate-950 text-white py-10 border-t border-slate-900 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div class="flex items-center gap-4">
-                <!-- Custom Circular Blue Blueprint Logo representing Uma Lulik and Edukasaun Timor with requested specs -->
-                <svg class="w-16 h-16 md:w-24 md:h-24 shrink-0 select-none bg-[#0a192f] rounded-2xl p-1 border border-cyan-500/30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <!-- Paths for curving text around inside the outer border -->
-                        <path id="text-path-top" d="M 30,100 A 70,70 0 0,1 170,100" />
-                        <path id="text-path-bottom" d="M 170,100 A 70,70 0 0,1 30,100" />
-                    </defs>
-                    <!-- Deep Blueprint Grid -->
-                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#0f3057" stroke-width="0.3"/>
-                    </pattern>
-                    <rect width="100%" height="100%" fill="url(#grid)" />
-
-                    <!-- Blueprint Axis Dimensions -->
-                    <line x1="20" y1="100" x2="180" y2="100" stroke="#00b4d8" stroke-width="0.3" stroke-dasharray="2 2" opacity="0.4" />
-                    <line x1="100" y1="20" x2="100" y2="180" stroke="#00b4d8" stroke-width="0.3" stroke-dasharray="2 2" opacity="0.4" />
-
-                    <!-- Technical Stamp Ring -->
-                    <circle cx="100" cy="100" r="82" fill="none" stroke="#00b4d8" stroke-width="1.2" opacity="0.8"/>
-                    <circle cx="100" cy="100" r="66" fill="none" stroke="#00b4d8" stroke-width="0.6" stroke-dasharray="1 1" opacity="0.8"/>
-
-                    <!-- Left: ELEVATION VIEW (UMA LULIK ELEVATION SCALE 1:57) -->
-                    <g transform="translate(10, 0)">
-                        <!-- Foundation Base (1000) -->
-                        <line x1="50" y1="135" x2="100" y2="135" stroke="#90e0ef" stroke-width="1" />
-                        <line x1="50" y1="135" x2="50" y2="145" stroke="#90e0ef" stroke-width="0.5" />
-                        <line x1="100" y1="135" x2="100" y2="145" stroke="#90e0ef" stroke-width="0.5" />
-                        <!-- Base Pillars (pilar) -->
-                        <line x1="58" y1="115" x2="58" y2="135" stroke="#90e0ef" stroke-width="0.8" />
-                        <line x1="75" y1="115" x2="75" y2="135" stroke="#90e0ef" stroke-width="0.8" />
-                        <line x1="92" y1="115" x2="92" y2="135" stroke="#90e0ef" stroke-width="0.8" />
-                        <!-- Platform Floor (150) -->
-                        <rect x="52" y="112" width="46" height="3" fill="none" stroke="#90e0ef" stroke-width="0.8" />
-                        <!-- Walls (180) -->
-                        <rect x="56" y="92" width="38" height="20" fill="none" stroke="#90e0ef" stroke-width="0.8" />
-                        <rect x="71" y="98" width="8" height="14" fill="none" stroke="#90e0ef" stroke-width="0.6" />
-                        <!-- Low Roof Plate (130) -->
-                        <line x1="48" y1="92" x2="102" y2="92" stroke="#90e0ef" stroke-width="1.2" />
-                        <!-- High pitched Thatch Roof (2300) -->
-                        <path d="M 52,92 L 65,48 L 85,48 L 98,92 Z" fill="none" stroke="#90e0ef" stroke-width="0.8" />
-                        <line x1="65" y1="48" x2="52" y2="92" stroke="#00b4d8" stroke-width="0.4" opacity="0.5" />
-                        <line x1="75" y1="48" x2="75" y2="92" stroke="#00b4d8" stroke-width="0.4" opacity="0.5" />
-                        <line x1="85" y1="48" x2="98" y2="92" stroke="#00b4d8" stroke-width="0.4" opacity="0.5" />
-                        <!-- Flared Crown Horns (2090) -->
-                        <path d="M 62,48 C 62,40 68,36 65,34" fill="none" stroke="#90e0ef" stroke-width="0.8" />
-                        <path d="M 88,48 C 88,40 82,36 85,34" fill="none" stroke="#90e0ef" stroke-width="0.8" />
-                        <line x1="62" y1="48" x2="88" y2="48" stroke="#90e0ef" stroke-width="1.2" />
-                        <!-- Finial Rod & Accents (45, 1910, 15) -->
-                        <line x1="75" y1="48" x2="75" y2="30" stroke="#90e0ef" stroke-width="0.8" />
-                        <circle cx="75" cy="32" r="1.5" fill="none" stroke="#90e0ef" stroke-width="0.6" />
-                        <line x1="68" y1="48" x2="68" y2="40" stroke="#90e0ef" stroke-width="0.6" />
-                        <line x1="82" y1="48" x2="82" y2="40" stroke="#90e0ef" stroke-width="0.6" />
-
-                        <!-- Elevation Label -->
-                        <text x="75" y="156" fill="#90e0ef" font-family="monospace" font-size="5" text-anchor="middle" letter-spacing="0.2">UMA LULIK ELEVATION</text>
-                        <text x="75" y="162" fill="#00b4d8" font-family="monospace" font-size="4.5" text-anchor="middle">SCALE 1:57</text>
-                        
-                        <!-- Dimension Indicator Lines -->
-                        <path d="M 104,30 L 108,30 M 104,135 L 108,135 M 106,30 L 106,135" fill="none" stroke="#00b4d8" stroke-width="0.4" />
-                        <text x="111" y="86" fill="#00b4d8" font-family="monospace" font-size="5" text-anchor="start">2300</text>
-                        <!-- Horn Span Indicator (2090) -->
-                        <path d="M 60,26 L 60,22 M 90,26 L 90,22 M 60,24 L 90,22" fill="none" stroke="#00b4d8" stroke-width="0.4" />
-                        <text x="75" y="20" fill="#00b4d8" font-family="monospace" font-size="5" text-anchor="middle">2090</text>
-                    </g>
-
-                    <!-- Right: PLAN VIEW (PLAN VIEW SCALE 1:30 & PILAR Details) -->
-                    <g transform="translate(68, 0)">
-                        <!-- Plan Grid Circle -->
-                        <circle cx="70" cy="90" r="22" fill="none" stroke="#00b4d8" stroke-width="0.5" stroke-dasharray="1 1" opacity="0.6"/>
-                        <!-- Pillars (Pilar - 4 dots with dimensions) -->
-                        <circle cx="58" cy="78" r="2.5" fill="#90e0ef" stroke="#00b4d8" stroke-width="0.5" />
-                        <circle cx="82" cy="78" r="2.5" fill="#90e0ef" stroke="#00b4d8" stroke-width="0.5" />
-                        <circle cx="58" cy="102" r="2.5" fill="#90e0ef" stroke="#00b4d8" stroke-width="0.5" />
-                        <circle cx="82" cy="102" r="2.5" fill="#90e0ef" stroke="#00b4d8" stroke-width="0.5" />
-                        <!-- Construction Axis Lines -->
-                        <line x1="44" y1="90" x2="96" y2="90" stroke="#00b4d8" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.5" />
-                        <line x1="70" y1="64" x2="70" y2="116" stroke="#00b4d8" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.5" />
-                        <!-- Measurement Arrows -->
-                        <path d="M 58,110 L 82,110" fill="none" stroke="#90e0ef" stroke-width="0.5" />
-                        <text x="70" y="117" fill="#90e0ef" font-family="monospace" font-size="5.5" text-anchor="middle">1000</text>
-                        <!-- Annotation Label -->
-                        <text x="70" y="72" fill="#90e0ef" font-family="monospace" font-size="5" font-weight="bold" text-anchor="middle">PILAR</text>
-                        <text x="70" y="132" fill="#90e0ef" font-family="monospace" font-size="5" text-anchor="middle" letter-spacing="0.2">PLAN VIEW</text>
-                        <text x="70" y="138" fill="#00b4d8" font-family="monospace" font-size="4.5" text-anchor="middle">SCALE 1:30</text>
-                    </g>
-
-                    <!-- Center Bottom Text (TETUN HO INGLÉS & Coordinate Accents) -->
-                    <text x="100" y="148" fill="#00b4d8" font-family="monospace" font-size="5" font-weight="bold" text-anchor="middle" letter-spacing="0.5">TETUN HO INGLÉS</text>
-                    <!-- Extra Technical indicators: 130, 180, 15, 150 -->
-                    <text x="100" y="16" fill="#00b4d8" font-family="monospace" font-size="4.5" opacity="0.5" text-anchor="middle">COORD AXIS GRIDREF: 130 / 180 / 15 / 150</text>
-
-                    <!-- Circular Curved Text: EDUKASAUN -->
-                    <text fill="#ffffff" font-family="'Nunito', sans-serif" font-size="10" font-weight="900" letter-spacing="3.5px">
-                        <textPath href="#text-path-top" startOffset="50%" text-anchor="middle">EDUKASAUN</textPath>
-                    </text>
-                    
-                    <!-- Circular Curved Text: TIMOR -->
-                    <text fill="#ffffff" font-family="'Nunito', sans-serif" font-size="10" font-weight="900" letter-spacing="4px">
-                        <textPath href="#text-path-bottom" startOffset="50%" text-anchor="middle">TIMOR</textPath>
-                    </text>
-                </svg>
+                <img src="https://raw.githubusercontent.com/EdukasaunTimor/stories/main/EdukasaunTimor%20logo.png" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/128x128/020e1e/00b4d8?text=ET';" 
+                     alt="EdukasaunTimor Logo" 
+                     class="w-20 h-20 md:w-24 md:h-24 object-contain rounded-3xl p-1 border border-slate-800 bg-[#020e1e]/50 select-none">
                 <div class="space-y-1">
                     <h4 class="font-extrabold text-base text-white tracking-tight">EdukasaunTimor.org</h4>
                     <p class="text-xs text-slate-500 font-medium">Digital Library Project</p>
