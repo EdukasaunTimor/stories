@@ -65,7 +65,7 @@
 <body class="bg-slate-50 min-h-screen flex flex-col">
     <!-- Offline alert banner -->
     <div id="offline-banner" class="bg-indigo-600 text-white text-xs font-semibold py-2 px-4 text-center relative hidden">
-        <span>Prontu Offline! Caching successfully completed.</span>
+        <span>Ready Offline! Caching successfully completed (Prontu Offline! Kache ho susesu).</span>
         <button onclick="document.getElementById('offline-banner').style.display='none'" class="absolute right-4 top-1/2 -translate-y-1/2 text-white font-bold opacity-75 hover:opacity-100">&times;</button>
     </div>
 
@@ -84,7 +84,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
-                    <span>Kache (Offline)</span>
+                    <span>Cache (Kache Offline)</span>
                 </button>
             </div>
         </div>
@@ -94,13 +94,13 @@
     <div id="custom-context-menu" class="border border-slate-100">
         <button onclick="contextAction('lookup')" class="w-full text-left px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 flex items-center gap-2 transition-colors">
             <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-            <span>Tradús liafuan (Translate)</span>
+            <span>Translate Word (Tradús liafuan)</span>
         </button>
         <button onclick="contextSpeak()" class="w-full text-left px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 flex items-center gap-2 transition-colors">
             <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
             </svg>
-            <span>Lee liafuan (Pronounce)</span>
+            <span>Pronounce Word (Lee liafuan)</span>
         </button>
     </div>
 
@@ -112,8 +112,8 @@
             </svg>
         </div>
         <div>
-            <h5 id="toast-title" class="font-bold text-sm text-white">Notifikasaun</h5>
-            <p id="toast-body" class="text-xs text-slate-300 mt-0.5">Informasaun prosesadu.</p>
+            <h5 id="toast-title" class="font-bold text-sm text-white">Notification</h5>
+            <p id="toast-body" class="text-xs text-slate-300 mt-0.5">Processed successfully.</p>
         </div>
     </div>
 
@@ -131,18 +131,18 @@
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
             </header>
 
-            <!-- Search and CEFR Level Filter Panel -->
+            <!-- Search and Level Filter Panel -->
             <div class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                 <div class="relative w-full sm:max-w-xs">
-                    <input type="text" id="search-input" onkeyup="filterStories()" placeholder="Buka istória... (Search stories)" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-11 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                    <input type="text" id="search-input" onkeyup="filterStories()" placeholder="Search stories... (Buka istória)" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-11 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
                     <svg class="w-5 h-5 text-slate-400 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </div>
                 <div class="flex gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
-                    <button onclick="filterLevel('all')" class="level-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md" data-level="all">Hotu (All)</button>
-                    <button onclick="filterLevel('A1')" class="level-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200" data-level="A1">Nivel A1</button>
-                    <button onclick="filterLevel('A2')" class="level-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200" data-level="A2">Nivel A2</button>
+                    <button onclick="filterLevel('all')" class="level-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md" data-level="all">All (Hotu)</button>
+                    <button onclick="filterLevel('A1')" class="level-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200" data-level="A1">A1</button>
+                    <button onclick="filterLevel('A2')" class="level-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200" data-level="A2">A2</button>
                 </div>
             </div>
 
@@ -160,17 +160,17 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
-                    <span>Fila ba Biblioteka (Back to Shelf)</span>
+                    <span>Back to Shelf (Fila ba Biblioteka)</span>
                 </button>
                 
                 <div class="flex items-center gap-3">
                     <!-- Toggle Activities Panel button -->
                     <button onclick="toggleSidebar()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold py-2 px-3.5 rounded-xl flex items-center gap-2 transition-all">
-                        <span id="sidebar-toggle-text">Taka Atividade (Hide Sidebar)</span>
+                        <span id="sidebar-toggle-text">Hide Sidebar (Taka Atividade)</span>
                     </button>
                     
                     <div class="bg-slate-100 p-1 rounded-xl flex gap-1">
-                        <button onclick="setLanguageMode('bilingual')" class="lang-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-slate-800 shadow-sm" data-mode="bilingual">Bilingu</button>
+                        <button onclick="setLanguageMode('bilingual')" class="lang-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-slate-800 shadow-sm" data-mode="bilingual">Bilingual (Bilingu)</button>
                         <button onclick="setLanguageMode('english')" class="lang-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900" data-mode="english">English</button>
                         <button onclick="setLanguageMode('tetun')" class="lang-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900" data-mode="tetun">Tetun</button>
                     </div>
@@ -184,7 +184,7 @@
                 <div id="activities-sidebar" class="lg:col-span-4 space-y-6 transition-all duration-300">
                     <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 space-y-6">
                         <div class="border-b border-slate-100 pb-3">
-                            <h3 class="font-black text-slate-900 text-lg header-font">Atividade Estuda</h3>
+                            <h3 class="font-black text-slate-900 text-lg header-font">Study Activities (Atividade Estuda)</h3>
                             <p class="text-[10px] text-slate-500">Test your reading comprehension instantly!</p>
                         </div>
 
@@ -197,7 +197,7 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <span>Verifika Resposta</span>
+                            <span>Verify Answers (Verifika Resposta)</span>
                         </button>
                     </div>
 
@@ -209,13 +209,13 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                 </svg>
                             </span>
-                            <h4 class="font-bold text-xs text-white">Disionáriu Klikan (Tap-to-Translate)</h4>
+                            <h4 class="font-bold text-xs text-white">Tap-to-Translate (Disionáriu Klikan)</h4>
                         </div>
                         <p class="text-[11px] text-slate-300 leading-relaxed">
                             Click or right-click on any highlighted word in the English story paragraphs to see its Tetun translation instantly!
                         </p>
                         <div id="interactive-lookup-box" class="p-3 bg-slate-800 rounded-xl hidden transition-all border border-slate-700">
-                            <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Liafuan: <span id="lookup-word" class="text-white"></span></span>
+                            <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Word (Liafuan): <span id="lookup-word" class="text-white"></span></span>
                             <p id="lookup-translation" class="text-sm font-bold text-emerald-400 mt-0.5"></p>
                         </div>
                     </div>
@@ -247,16 +247,16 @@
                                 </svg>
                             </button>
                             <div>
-                                <h4 class="text-xs font-bold text-slate-800">Lian-Haktuir (Offline Audio Generator)</h4>
+                                <h4 class="text-xs font-bold text-slate-800">Voice Narrator (Lian-Haktuir Offline)</h4>
                                 <p class="text-[10px] text-slate-500">Tap play to read out loud segment-by-segment</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs text-slate-500 font-semibold">Velosidade (Speed):</span>
+                            <span class="text-xs text-slate-500 font-semibold">Speed (Velosidade):</span>
                             <select id="audio-speed" class="text-xs bg-white border border-slate-200 rounded-lg p-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500">
-                                <option value="0.75">Neineik (0.75x)</option>
+                                <option value="0.75">Slow (0.75x - Neineik)</option>
                                 <option value="1.0" selected>Normal (1.0x)</option>
-                                <option value="1.25">Lais (1.25x)</option>
+                                <option value="1.25">Fast (1.25x - Lais)</option>
                             </select>
                         </div>
                     </div>
@@ -274,9 +274,80 @@
     <!-- Decluttered Footer Layout matching image_7ad3e2.png exactly -->
     <footer class="bg-slate-950 text-white py-10 border-t border-slate-900 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div class="space-y-1">
-                <h4 class="font-extrabold text-base text-white tracking-tight">EdukasaunTimor.org</h4>
-                <p class="text-xs text-slate-500 font-medium">Digital Library Project</p>
+            <div class="flex items-center gap-4">
+                <!-- Custom Circular Blue Blueprint Logo representing Uma Lulik and Edukasaun Timor -->
+                <svg class="w-14 h-14 shrink-0 rounded-full select-none" viewBox="0 0 100 100">
+                    <defs>
+                        <!-- Paths for curving text around inside the outer border -->
+                        <path id="text-path-top" d="M 14,50 A 36,36 0 0,1 86,50" />
+                        <path id="text-path-bottom" d="M 86,50 A 36,36 0 0,1 14,50" />
+                    </defs>
+                    <!-- Navy Blue Outer Ring -->
+                    <circle cx="50" cy="50" r="48" fill="#0f2142" />
+                    <!-- White Inner Area -->
+                    <circle cx="50" cy="50" r="36" fill="#ffffff" stroke="#0f2142" stroke-width="1" />
+                    
+                    <!-- Blueprint Grid Lines -->
+                    <line x1="20" y1="35" x2="80" y2="35" stroke="#0f2142" stroke-width="0.3" opacity="0.3" stroke-dasharray="1 1" />
+                    <line x1="20" y1="45" x2="80" y2="45" stroke="#0f2142" stroke-width="0.3" opacity="0.3" stroke-dasharray="1 1" />
+                    <line x1="20" y1="58" x2="80" y2="58" stroke="#0f2142" stroke-width="0.3" opacity="0.3" stroke-dasharray="1 1" />
+                    <line x1="30" y1="15" x2="30" y2="75" stroke="#0f2142" stroke-width="0.3" opacity="0.3" stroke-dasharray="1 1" />
+                    <line x1="70" y1="15" x2="70" y2="75" stroke="#0f2142" stroke-width="0.3" opacity="0.3" stroke-dasharray="1 1" />
+                    <line x1="50" y1="15" x2="50" y2="75" stroke="#0f2142" stroke-width="0.3" opacity="0.3" stroke-dasharray="1 1" />
+
+                    <!-- Uma Lulik Architecture Blueprint Details -->
+                    <!-- Base Pillars -->
+                    <line x1="38" y1="65" x2="38" y2="72" stroke="#0f2142" stroke-width="1" />
+                    <line x1="44" y1="65" x2="44" y2="72" stroke="#0f2142" stroke-width="1" />
+                    <line x1="50" y1="65" x2="50" y2="72" stroke="#0f2142" stroke-width="1" />
+                    <line x1="56" y1="65" x2="56" y2="72" stroke="#0f2142" stroke-width="1" />
+                    <line x1="62" y1="65" x2="62" y2="72" stroke="#0f2142" stroke-width="1" />
+                    
+                    <!-- Platform Foundation -->
+                    <line x1="32" y1="65" x2="68" y2="65" stroke="#0f2142" stroke-width="1" />
+                    
+                    <!-- Walls -->
+                    <rect x="36" y="52" width="28" height="13" fill="none" stroke="#0f2142" stroke-width="1" />
+                    <line x1="42" y1="52" x2="42" y2="65" stroke="#0f2142" stroke-width="0.6" />
+                    <line x1="58" y1="52" x2="58" y2="65" stroke="#0f2142" stroke-width="0.6" />
+                    <rect x="47" y="55" width="6" height="10" fill="none" stroke="#0f2142" stroke-width="0.8" />
+                    
+                    <!-- Lower Roof -->
+                    <line x1="30" y1="52" x2="70" y2="52" stroke="#0f2142" stroke-width="1.2" />
+                    
+                    <!-- Main High-pitched Roof (Traditional Flared Roof) -->
+                    <path d="M 33,52 L 43,26 L 57,26 L 67,52 Z" fill="none" stroke="#0f2142" stroke-width="1" />
+                    <!-- Thatching texture lines -->
+                    <line x1="43" y1="26" x2="33" y2="52" stroke="#0f2142" stroke-width="0.4" opacity="0.6" />
+                    <line x1="46" y1="26" x2="39" y2="52" stroke="#0f2142" stroke-width="0.4" opacity="0.6" />
+                    <line x1="50" y1="26" x2="50" y2="52" stroke="#0f2142" stroke-width="0.4" opacity="0.6" />
+                    <line x1="54" y1="26" x2="61" y2="52" stroke="#0f2142" stroke-width="0.4" opacity="0.6" />
+                    <line x1="57" y1="26" x2="67" y2="52" stroke="#0f2142" stroke-width="0.4" opacity="0.6" />
+                    
+                    <!-- Traditional Crown Horns (Lelik) and Finials -->
+                    <path d="M 41,26 C 41,23 44,22 43,21" fill="none" stroke="#0f2142" stroke-width="0.8" />
+                    <path d="M 59,26 C 59,23 56,22 57,21" fill="none" stroke="#0f2142" stroke-width="0.8" />
+                    <line x1="41" y1="26" x2="59" y2="26" stroke="#0f2142" stroke-width="1.2" />
+                    
+                    <line x1="50" y1="26" x2="50" y2="18" stroke="#0f2142" stroke-width="0.8" />
+                    <circle cx="50" cy="20" r="1" fill="#0f2142" />
+                    <line x1="45" y1="26" x2="45" y2="21" stroke="#0f2142" stroke-width="0.8" />
+                    <line x1="55" y1="26" x2="55" y2="21" stroke="#0f2142" stroke-width="0.8" />
+                    
+                    <!-- Circular Text: EDUKASAUN -->
+                    <text fill="#ffffff" font-family="'Nunito', sans-serif" font-size="8.5" font-weight="900" letter-spacing="1px" text-anchor="middle">
+                        <textPath href="#text-path-top" startOffset="50%">EDUKASAUN</textPath>
+                    </text>
+                    
+                    <!-- Circular Text: TIMOR -->
+                    <text fill="#ffffff" font-family="'Nunito', sans-serif" font-size="8.5" font-weight="900" letter-spacing="1.5px" text-anchor="middle">
+                        <textPath href="#text-path-bottom" startOffset="50%">TIMOR</textPath>
+                    </text>
+                </svg>
+                <div class="space-y-1">
+                    <h4 class="font-extrabold text-base text-white tracking-tight">EdukasaunTimor.org</h4>
+                    <p class="text-xs text-slate-500 font-medium">Digital Library Project</p>
+                </div>
             </div>
             <div class="text-left md:text-right">
                 <p class="text-xs text-slate-500">© 2026 EdukasaunTimor.org. All rights reserved.</p>
@@ -587,12 +658,12 @@
                         tl: "Nia hamnasa Mana Nehek no hatete, \"Udan sei dook. Mai halimar!\""
                     },
                     {
-                        en: "But Sister Ant says, \"No, the cold season is coming. We must prepare.\"",
-                        tl: "Maibé Mana Nehek hatete, \"Lae, tempu malirin atu mai. Ita tenke prepara.\""
+                        en: "But Sister Ant is collecting food for the wet season. You should work, too.",
+                        tl: "Lae, ha'u halibur hahán ba tempu-udan. Ó mós tenke serbisu."
                     },
                     {
-                        en: "When the rain season arrives, Brother Grasshopper is wet, cold, and hungry.",
-                        tl: "Bainhira tempu-udan to'o, Maun Gafañotu nabeen, malirin, no hamlaha."
+                        en: "Soon, the weather changes, and the wet season arrives.",
+                        tl: "Lakleur, klima troka, no tempu-udan to'o mai."
                     },
                     {
                         en: "Sister Ant is kind and shares her food with him.",
@@ -663,7 +734,7 @@
                     <div class="p-6 flex flex-col flex-grow space-y-4">
                         <div class="flex items-center justify-between">
                             <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${story.level === 'A1' ? 'bg-indigo-50 text-indigo-700' : 'bg-violet-50 text-violet-700'}">
-                                Nivel ${story.level}
+                                ${story.level}
                             </span>
                             <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">timor-leste</span>
                         </div>
@@ -673,7 +744,7 @@
                         </div>
                         <p class="text-xs text-slate-600 leading-relaxed flex-grow">${story.desc}</p>
                         <button onclick="openStory('${story.id}')" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all active:scale-95 shadow-md flex items-center justify-center gap-2">
-                            <span>Lee Istória (Read Story)</span>
+                            <span>Read Story (Lee Istória)</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
@@ -734,7 +805,7 @@
             renderSegments();
             renderExercises();
             navigate('reader');
-            showToast("Istória Loke ona!", "Enjoy reading this story bilingually or segment-by-segment.");
+            showToast("Story Opened! (Istória Loke ona!)", "Enjoy reading this story bilingually or segment-by-segment.");
         }
 
         function renderSegments() {
@@ -799,7 +870,7 @@
                 } else if (ex.type === 'write') {
                     item.innerHTML = `
                         <h5 class="text-xs font-bold text-slate-900 leading-snug">${ex.question}</h5>
-                        <input type="text" id="exercise-input-${idx}" placeholder="Hakerek resposta... (Type answer)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                        <input type="text" id="exercise-input-${idx}" placeholder="Type answer... (Hakerek resposta)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500">
                         <div id="exercise-feedback-${idx}" class="text-[10px] font-bold hidden"></div>
                     `;
                 }
@@ -820,10 +891,10 @@
                 if (ex.type === 'multiple') {
                     const selected = document.querySelector(`input[name="exercise-${idx}"]:checked`);
                     if (selected && parseInt(selected.value) === ex.correct) {
-                        feedback.innerText = "Loloos! (Correct)";
+                        feedback.innerText = "Correct (Loloos!)";
                         feedback.className = "text-[10px] font-bold text-emerald-600 mt-1";
                     } else {
-                        feedback.innerText = "Koko fali! (Wrong answer)";
+                        feedback.innerText = "Try again! (Koko fali!)";
                         feedback.className = "text-[10px] font-bold text-rose-600 mt-1";
                         allCorrect = false;
                     }
@@ -831,10 +902,10 @@
                     const val = document.getElementById(`exercise-input-${idx}`).value.trim().toLowerCase();
                     const correctVal = ex.correct.toLowerCase();
                     if (val === correctVal) {
-                        feedback.innerText = "Loloos! (Correct)";
+                        feedback.innerText = "Correct (Loloos!)";
                         feedback.className = "text-[10px] font-bold text-emerald-600 mt-1";
                     } else {
-                        feedback.innerText = `Koko fali! Resposta loos mak: "${ex.correct}"`;
+                        feedback.innerText = `Try again! Correct answer: "${ex.correct}" (Koko fali! Resposta loos: "${ex.correct}")`;
                         feedback.className = "text-[10px] font-bold text-rose-600 mt-1";
                         allCorrect = false;
                     }
@@ -842,9 +913,9 @@
             });
 
             if (allCorrect) {
-                showToast("Parabéns!", "Ita hatán loos ba atividade hotu! Outstanding reading comprehension!");
+                showToast("Perfect Score! (Parabéns!)", "All answers are correct! Outstanding reading comprehension.");
             } else {
-                showToast("Haree Resposta", "Hadi'a fila fali resposta ne'ebé sala.");
+                showToast("Check Answers (Haree Resposta)", "Correct the wrong answers and try again.");
             }
         }
 
@@ -862,7 +933,7 @@
                     document.getElementById('lookup-word').innerText = cleanWord;
                     document.getElementById('lookup-translation').innerText = trans;
                     
-                    showToast("Tradusaun Hetan!", `${cleanWord} in Tetun is: ${trans}`);
+                    showToast("Translation Found! (Tradusaun Hetan!)", `${cleanWord} in Tetun is: ${trans}`);
                 };
 
                 // Right click action handles
@@ -929,14 +1000,14 @@
 
             const synth = window.speechSynthesis;
             if (!synth) {
-                showToast("Lian la suporta", "Your device does not support Web Speech Synthesis offline.");
+                showToast("Speech unsupported (Lian la suporta)", "Your device does not support Web Speech Synthesis offline.");
                 return;
             }
 
             if (synth.speaking) {
                 synth.cancel();
                 document.getElementById('play-icon').setAttribute('d', 'M8 5v14l11-7z');
-                showToast("Lian-Haktuir Paradu", "Web Speech Synthesis canceled.");
+                showToast("Narrator Stopped (Lian-Haktuir Paradu)", "Web Speech Synthesis canceled.");
                 return;
             }
 
@@ -1003,12 +1074,12 @@
                 sidebar.classList.remove('hidden');
                 sidebar.classList.add('block');
                 panel.className = "lg:col-span-8 bg-white rounded-3xl p-6 md:p-8 shadow-md border border-slate-100 space-y-8 transition-all duration-300";
-                toggleText.innerText = "Taka Atividade (Hide Sidebar)";
+                toggleText.innerText = "Hide Sidebar (Taka Atividade)";
             } else {
                 sidebar.classList.remove('block');
                 sidebar.classList.add('hidden');
                 panel.className = "lg:col-span-12 bg-white rounded-3xl p-6 md:p-8 shadow-md border border-slate-100 space-y-8 transition-all duration-300";
-                toggleText.innerText = "Hatudu Atividade (Show Sidebar)";
+                toggleText.innerText = "Show Sidebar (Hatudu Atividade)";
             }
         }
 
@@ -1025,11 +1096,11 @@
         }
 
         function triggerOfflineCache() {
-            showToast("Kache hela...", "Savin' all stories and dictionary lookups offline.");
+            showToast("Caching... (Kache hela)", "Saving all stories and dictionary lookups offline.");
             setTimeout(() => {
                 document.getElementById('offline-banner').classList.remove('hidden');
                 document.getElementById('offline-banner').classList.add('block');
-                showToast("Prontu Offline!", "Saves completed! Teachers and students can now run this complete hub offline inside eskolas.");
+                showToast("Ready Offline! (Prontu Offline!)", "Assets cached successfully! Teachers and students can now run this complete hub offline inside eskolas.");
             }, 1500);
         }
     </script>
