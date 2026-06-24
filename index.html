@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EdukasaunTimor - English Stories Hub</title>
+    <!-- Web App Manifest Link -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/000000/bilingual.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +57,7 @@
         </span>
     </div>
 
-    <!-- Customized Alert Alert Dialog -->
+    <!-- Customized Alert Dialog -->
     <div id="alert-box" class="fixed top-5 right-5 z-50 transform translate-y-[-100px] opacity-0 transition-all duration-300 max-w-sm w-full bg-white rounded-2xl p-4 shadow-xl border border-slate-100 flex items-start gap-3 pointer-events-none">
         <div id="alert-icon-container" class="p-2 rounded-xl shrink-0"></div>
         <div>
@@ -216,13 +222,13 @@
             </div>
             <div class="text-center md:text-right space-y-1">
                 <p class="text-xs">&copy; 2026 EdukasaunTimor.org. All rights reserved.</p>
-                <p class="text-[10px] text-slate-600">Tetun Translations Rev. 2026-JAN_14 INL Compliant</p>
+                <p class="text-[10px] text-slate-600">Tetun Translations Rev. 2026-JAN_15 INL Compliant</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Storybook localized mock database mapped directly to Grade 8 Student book manuals and TETUN (INL) Rev. 2026-JAN_14 standards
+        // Storybook localized mock database mapped directly to Grade 8 Student book manuals and TETUN (INL) Rev. 2026-JAN_15 standards
         const STORIES_DATABASE = [
             {
                 id: 1,
@@ -236,16 +242,13 @@
                     <rect width="100%" height="100%" fill="#EEF2FF"/>
                     <circle cx="200" cy="110" r="140" fill="#E0E7FF" opacity="0.6"/>
                     <path d="M 0 160 Q 100 120, 200 160 T 400 160 L 400 220 L 0 220 Z" fill="#C7D2FE" opacity="0.8"/>
-                    <!-- School Building silhouette -->
                     <rect x="140" y="70" width="120" height="90" fill="#818CF8" rx="8"/>
                     <polygon points="120,70 200,30 280,70" fill="#4F46E5"/>
                     <rect x="190" y="120" width="20" height="40" fill="#312E81"/>
-                    <!-- Animated character avatars -->
                     <circle cx="160" cy="130" r="12" fill="#E2E8F0"/>
                     <path d="M 148 155 Q 160 145, 172 155" stroke="#475569" stroke-width="4" fill="none"/>
                     <circle cx="240" cy="130" r="12" fill="#F1F5F9"/>
                     <path d="M 228 155 Q 240 145, 252 155" stroke="#475569" stroke-width="4" fill="none"/>
-                    <!-- Pencil graphics -->
                     <path d="M 200 135 L 205 120 L 210 135 Z" fill="#FBBF24"/>
                 </svg>`,
                 segments: [
@@ -300,14 +303,11 @@
                 coverSvg: `<svg viewBox="0 0 400 220" class="w-full h-full rounded-2xl" xmlns="http://www.w3.org/2000/svg">
                     <rect width="100%" height="100%" fill="#FEF3C7"/>
                     <circle cx="340" cy="50" r="30" fill="#F59E0B" opacity="0.8"/>
-                    <!-- Road graphics -->
                     <path d="M 0 220 L 160 110 L 240 110 L 400 220" fill="#D97706" opacity="0.3"/>
                     <path d="M 200 110 L 200 220" stroke="#FFF" stroke-width="4" stroke-dasharray="10, 10"/>
-                    <!-- Signposts -->
                     <rect x="180" y="60" width="40" height="4" fill="#78350F"/>
                     <polygon points="180,55 160,62 180,69" fill="#D97706"/>
                     <rect x="198" y="60" width="4" height="60" fill="#78350F"/>
-                    <!-- Lost boy silhouette -->
                     <circle cx="90" cy="140" r="10" fill="#451A03"/>
                     <path d="M 90 150 L 90 180 M 80 160 L 100 160 M 80 200 L 90 180 L 100 200" stroke="#451A03" stroke-width="4"/>
                 </svg>`,
@@ -363,20 +363,16 @@
                 coverSvg: `<svg viewBox="0 0 400 220" class="w-full h-full rounded-2xl" xmlns="http://www.w3.org/2000/svg">
                     <rect width="100%" height="100%" fill="#ECFDF5"/>
                     <circle cx="200" cy="110" r="140" fill="#D1FAE5" opacity="0.6"/>
-                    <!-- Ant Hill and grass -->
                     <path d="M 0 180 Q 200 130, 400 180 L 400 220 L 0 220 Z" fill="#059669" opacity="0.8"/>
-                    <!-- Grasshopper on a leaf -->
                     <path d="M 120 120 C 140 100, 200 100, 220 120" stroke="#10B981" stroke-width="8" stroke-linecap="round" fill="none"/>
-                    <!-- Ant carrying food -->
                     <circle cx="280" cy="150" r="10" fill="#047857"/>
                     <circle cx="270" cy="155" r="8" fill="#047857"/>
-                    <!-- Corn kernel -->
                     <path d="M 265 135 Q 275 125, 285 135 Z" fill="#FBBF24"/>
                 </svg>`,
                 segments: [
                     {
                         en: "One day, in the hot sun, Sister Ant is working very hard. She is carrying a big piece of corn on her back. She walks slowly to her house.",
-                        tl: "Loron ida, iha loro-manas okos, Mana Nehek serbisu badinas (working very hard). Nia hulan hodi lori batar pedasuk boot ida iha ninia kotuk. Nia la'o neineik ba ninia uma."
+                        tl: "Loron ida, iha loraik manas okos, Mana Nehek serbisu badinas (working very hard). Nia hulan hodi lori batar pedasuk boot ida iha ninia kotuk. Nia la'o neineik ba ninia uma."
                     },
                     {
                         en: "Brother Grasshopper is sitting under a banana tree. He is playing his guitar and singing. He looks at Sister Ant and laughs.",
@@ -449,6 +445,13 @@
                 document.getElementById('offline-banner').classList.remove('hidden');
             }
             renderStoriesShelf();
+
+            // Register Service Worker for PWA Offline Mechanics
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Offline PWA Service Worker Registered!', reg))
+                    .catch(err => console.error('Service Worker registration failed:', err));
+            }
         }
 
         // Render Bookshelf View
