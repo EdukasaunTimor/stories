@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EdukasaunTimor - English Stories Hub</title>
+    <title>EdukasaunTimor - Digital Storybooks</title>
     <!-- Web App Manifest Link -->
-    <link rel="manifest" href="./manifest.json">
+    <link class="manifest-link" rel="manifest" href="./manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://img.icons8.com/color/192/000000/bilingual.png">
+    <link class="apple-touch-icon" href="https://img.icons8.com/color/192/000000/bilingual.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,49 +38,49 @@
         .story-card-shadow {
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
         }
-        .word-highlight {
-            background-color: rgba(253, 224, 71, 0.4);
-            border-radius: 2px;
-            transition: background-color 0.2s;
+        .word-span {
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border-bottom: 1px dashed transparent;
+        }
+        .word-span:hover {
+            background-color: rgba(99, 102, 241, 0.15);
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        /* Custom context menu styles */
+        #custom-context-menu {
+            display: none;
+            position: absolute;
+            z-index: 1000;
+            min-width: 160px;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 transition-colors duration-200 min-h-screen flex flex-col">
-
-    <!-- Offline Banner -->
-    <div id="offline-banner" class="hidden bg-amber-500 text-white text-center py-2.5 px-4 text-sm font-semibold transition-all duration-300 shadow-inner z-50 sticky top-0">
-        <span class="flex items-center justify-center gap-2">
-            <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-3.536 4.978 4.978 0 011.414-3.536m0 0L11.364 8.464M3 3l18 18"></path>
-            </svg>
-            Modu Offline Ativu — Lian no Testu hotu kaxidu tiha ona! (Offline Mode Active — Audio & Text Cached!)
-        </span>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+    <!-- Offline alert banner -->
+    <div id="offline-banner" class="bg-indigo-600 text-white text-xs font-semibold py-2 px-4 text-center relative hidden">
+        <span>Prontu Offline! Caching successfully completed.</span>
+        <button onclick="document.getElementById('offline-banner').style.display='none'" class="absolute right-4 top-1/2 -translate-y-1/2 text-white font-bold opacity-75 hover:opacity-100">&times;</button>
     </div>
 
-    <!-- Customized Alert Dialog -->
-    <div id="alert-box" class="fixed top-5 right-5 z-50 transform translate-y-[-100px] opacity-0 transition-all duration-300 max-w-sm w-full bg-white rounded-2xl p-4 shadow-xl border border-slate-100 flex items-start gap-3 pointer-events-none">
-        <div id="alert-icon-container" class="p-2 rounded-xl shrink-0"></div>
-        <div>
-            <h5 id="alert-title" class="font-bold text-slate-900 text-sm"></h5>
-            <p id="alert-desc" class="text-xs text-slate-500 mt-0.5"></p>
-        </div>
-    </div>
-
-    <!-- Navigation Bar -->
-    <nav class="bg-indigo-600 text-white sticky top-0 z-40 shadow-md">
-        <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-2.5 cursor-pointer" onclick="navigate('shelf')">
-                <span class="bg-white text-indigo-600 font-black px-2.5 py-1 rounded-lg text-lg header-font shadow-sm">E8</span>
+    <!-- Main Navigation Bar -->
+    <nav class="bg-white border-b border-slate-100 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('shelf')">
+                <span class="bg-indigo-600 text-white font-black px-3 py-1.5 rounded-xl text-xl header-font shadow-md tracking-wider">ET</span>
                 <div>
-                    <h1 class="font-bold text-sm md:text-base header-font tracking-tight">EdukasaunTimor.org</h1>
-                    <p class="text-[10px] text-indigo-100 uppercase tracking-widest font-semibold">English Library</p>
+                    <h1 class="font-black text-sm md:text-base header-font tracking-tight text-slate-900">EdukasaunTimor.org</h1>
+                    <p class="text-[10px] text-indigo-600 uppercase tracking-widest font-bold">Digital Library</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <button id="btn-text-size" onclick="toggleGlobalTextSize()" class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold p-2.5 rounded-lg text-sm transition-all active:scale-95 shadow-sm hidden" title="Muda Kór/Kapasidade Testu">
-                    A<sup>+</sup>
-                </button>
-                <button onclick="triggerOfflineCache()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-3.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-95 shadow-sm">
+                <button onclick="triggerOfflineCache()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center gap-2 transition-all active:scale-95 shadow-md">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
@@ -90,45 +90,71 @@
         </div>
     </nav>
 
+    <!-- Custom Context Menu for Right Click Action -->
+    <div id="custom-context-menu" class="border border-slate-100">
+        <button onclick="contextAction('lookup')" class="w-full text-left px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 flex items-center gap-2 transition-colors">
+            <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            <span>Tradús liafuan (Translate)</span>
+        </button>
+        <button onclick="contextSpeak()" class="w-full text-left px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+            <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+            </svg>
+            <span>Lee liafuan (Pronounce)</span>
+        </button>
+    </div>
+
+    <!-- Custom Floating Notification/Toast -->
+    <div id="custom-toast" class="fixed bottom-5 right-5 z-50 max-w-sm w-full bg-slate-900 text-white rounded-2xl p-4 shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-start gap-3 pointer-events-none">
+        <div id="toast-icon" class="p-2 rounded-xl bg-indigo-500/20 text-indigo-400 shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+        <div>
+            <h5 id="toast-title" class="font-bold text-sm text-white">Notifikasaun</h5>
+            <p id="toast-body" class="text-xs text-slate-300 mt-0.5">Informasaun prosesadu.</p>
+        </div>
+    </div>
+
     <!-- Main Content Container -->
-    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8">
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <!-- Shelf View / Library Hub Dashboard -->
         <section id="shelf-view" class="space-y-8 block">
-            <header class="bg-gradient-to-r from-indigo-700 to-violet-800 text-white py-12 px-6 rounded-3xl text-center shadow-md relative overflow-hidden">
-                <div class="relative z-10 space-y-3 max-w-2xl mx-auto">
-                    <span class="bg-indigo-500/30 text-indigo-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Curriculum Library</span>
-                    <h2 class="text-3xl md:text-4xl font-extrabold header-font tracking-tight">Digital Storybook Library</h2>
-                    <p class="text-sm md:text-base text-indigo-100 font-light leading-relaxed">
-                        Interactive platform specifically structured for English learners and teachers in Timor-Leste.
+            <header class="bg-gradient-to-tr from-indigo-600 via-indigo-700 to-violet-800 text-white py-14 px-8 rounded-3xl text-center shadow-lg relative overflow-hidden">
+                <div class="relative z-10 space-y-4 max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-5xl font-black header-font tracking-tight">Digital Storybooks</h2>
+                    <p class="text-sm md:text-lg text-indigo-100 font-light leading-relaxed">
+                        Interactive stories for English learners and teachers in Timor-Leste.
                     </p>
                 </div>
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
             </header>
 
-            <!-- Search and Filter Panel -->
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+            <!-- Search and CEFR Level Filter Panel -->
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                 <div class="relative w-full sm:max-w-xs">
-                    <input type="text" id="search-input" onkeyup="filterStories()" placeholder="Buka istória... (Search story)" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
-                    <svg class="w-5 h-5 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <input type="text" id="search-input" onkeyup="filterStories()" placeholder="Buka istória... (Search stories)" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-11 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                    <svg class="w-5 h-5 text-slate-400 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </div>
                 <div class="flex gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
-                    <button onclick="filterPeriod('all')" class="period-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white" data-period="all">Hotu (All)</button>
-                    <button onclick="filterPeriod('1')" class="period-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-600" data-period="1">Period 1</button>
-                    <button onclick="filterPeriod('3')" class="period-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-600" data-period="3">Period 3</button>
+                    <button onclick="filterLevel('all')" class="level-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md" data-level="all">Hotu (All)</button>
+                    <button onclick="filterLevel('A1')" class="level-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200" data-level="A1">Nivel A1</button>
+                    <button onclick="filterLevel('A2')" class="level-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200" data-level="A2">Nivel A2</button>
                 </div>
             </div>
 
-            <!-- Virtual Bookshelf Grid -->
+            <!-- Stories Grid Container -->
             <div id="stories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Dynamically injected story cards -->
+                <!-- Will be dynamically generated by JS -->
             </div>
         </section>
 
         <!-- Reader View / Interactive Book Player -->
-        <section id="reader-view" class="space-y-8 hidden">
+        <section id="reader-view" class="space-y-6 hidden">
             <!-- Back Navigation & Book Bar -->
             <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
                 <button onclick="navigate('shelf')" class="flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors">
@@ -137,8 +163,13 @@
                     </svg>
                     <span>Fila ba Biblioteka (Back to Shelf)</span>
                 </button>
-                <div class="flex items-center gap-2">
-                    <span class="text-xs text-slate-500 font-semibold">Testu/Lian (Mode):</span>
+                
+                <div class="flex items-center gap-3">
+                    <!-- Toggle Activities Panel button -->
+                    <button onclick="toggleSidebar()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold py-2 px-3.5 rounded-xl flex items-center gap-2 transition-all">
+                        <span id="sidebar-toggle-text">Taka Atividade (Hide Sidebar)</span>
+                    </button>
+                    
                     <div class="bg-slate-100 p-1 rounded-xl flex gap-1">
                         <button onclick="setLanguageMode('bilingual')" class="lang-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-slate-800 shadow-sm" data-mode="bilingual">Bilingu</button>
                         <button onclick="setLanguageMode('english')" class="lang-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900" data-mode="english">English</button>
@@ -147,27 +178,71 @@
                 </div>
             </div>
 
-            <!-- Immersive Split Story Panels -->
+            <!-- Immersive Split Story Panels (Activities on the Left, Reader on the Right) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
-                <!-- Story Panel Container (Left Side) -->
-                <div class="lg:col-span-8 bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100 space-y-8">
-                    <!-- Dynamic Header -->
-                    <div class="border-b border-slate-100 pb-4">
-                        <span id="reader-meta" class="text-xs font-bold text-indigo-600 uppercase tracking-widest"></span>
-                        <h2 id="reader-title-en" class="text-2xl md:text-3xl font-black text-slate-900 mt-1 header-font"></h2>
-                        <h3 id="reader-title-tl" class="text-lg md:text-xl font-bold text-slate-500 mt-0.5"></h3>
+                <!-- Left Sidebar: Exercises, Activities, Dictionary -->
+                <div id="activities-sidebar" class="lg:col-span-4 space-y-6 transition-all duration-300">
+                    <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 space-y-6">
+                        <div class="border-b border-slate-100 pb-3">
+                            <h3 class="font-black text-slate-900 text-lg header-font">Atividade Estuda</h3>
+                            <p class="text-[10px] text-slate-500">Test your reading comprehension instantly!</p>
+                        </div>
+
+                        <!-- Exercises Injector -->
+                        <div id="exercises-container" class="space-y-6">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+
+                        <button onclick="checkAnswers()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold transition-all active:scale-95 shadow-md flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Verifika Resposta</span>
+                        </button>
                     </div>
 
-                    <!-- Dynamic Illustration Container -->
-                    <div id="reader-illustration" class="w-full bg-slate-50 rounded-2xl overflow-hidden aspect-video flex items-center justify-center p-4">
+                    <!-- Dictionary Tooltip box -->
+                    <div class="bg-slate-900 text-slate-100 rounded-3xl p-6 shadow-md space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-400">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </span>
+                            <h4 class="font-bold text-xs text-white">Disionáriu Klikan (Tap-to-Translate)</h4>
+                        </div>
+                        <p class="text-[11px] text-slate-300 leading-relaxed">
+                            Click or right-click on any highlighted word in the English story paragraphs to see its Tetun translation instantly!
+                        </p>
+                        <div id="interactive-lookup-box" class="p-3 bg-slate-800 rounded-xl hidden transition-all border border-slate-700">
+                            <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">Liafuan: <span id="lookup-word" class="text-white"></span></span>
+                            <p id="lookup-translation" class="text-sm font-bold text-emerald-400 mt-0.5"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Reading Panel (Adjusts layout size based on sidebar visibility) -->
+                <div id="reading-panel" class="lg:col-span-8 bg-white rounded-3xl p-6 md:p-8 shadow-md border border-slate-100 space-y-8 transition-all duration-300">
+                    <!-- Modern Colored Box Title Section -->
+                    <div class="bg-gradient-to-r from-indigo-700 to-violet-800 text-white p-6 rounded-2xl shadow-sm relative overflow-hidden">
+                        <div class="relative z-10 space-y-2">
+                            <span id="reader-meta" class="px-2.5 py-1 text-[9px] font-black rounded-md bg-white/20 text-white uppercase tracking-wider"></span>
+                            <h2 id="reader-title-en" class="text-2xl md:text-3xl font-black tracking-tight mt-2 header-font"></h2>
+                            <h3 id="reader-title-tl" class="text-base md:text-lg font-bold text-indigo-200"></h3>
+                        </div>
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_16px]"></div>
+                    </div>
+
+                    <!-- Illustration Container -->
+                    <div id="reader-illustration" class="w-full bg-slate-50 rounded-2xl overflow-hidden aspect-video flex items-center justify-center p-4 border border-slate-100 shadow-inner">
                         <!-- Responsive SVG covers are loaded here dynamically -->
                     </div>
 
                     <!-- Audio Reader Interface -->
-                    <div class="bg-indigo-50/50 p-4 rounded-2xl flex flex-col sm:flex-row gap-4 items-center justify-between">
+                    <div class="bg-indigo-50/50 p-4 rounded-2xl flex flex-col sm:flex-row gap-4 items-center justify-between border border-indigo-50">
                         <div class="flex items-center gap-3">
-                            <button id="btn-audio-play" onclick="toggleAudioReader()" class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-full shadow-md active:scale-95 transition-all">
+                            <button id="btn-audio-play" onclick="toggleAudioReader()" class="bg-indigo-600 hover:bg-indigo-700 text-white p-3.5 rounded-full shadow-md active:scale-95 transition-all">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="play-icon">
                                     <path d="M8 5v14l11-7z"></path>
                                 </svg>
@@ -193,601 +268,232 @@
                     </div>
                 </div>
 
-                <!-- Exercises & Activities Panel (Right Side) -->
-                <div class="lg:col-span-4 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 space-y-6">
-                    <h3 class="font-bold text-lg text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2 header-font">
-                        <span class="p-1.5 bg-yellow-100 text-yellow-700 rounded-lg">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                        </span>
-                        <span>Prátika Unidade (Curriculum Game)</span>
-                    </h3>
-
-                    <!-- Quiz Content wrapper -->
-                    <div id="quiz-container" class="space-y-4">
-                        <!-- Dynamic Unit-specific matches load here -->
-                    </div>
-                </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-10 px-4 mt-12 shrink-0 border-t border-slate-800">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="space-y-1 text-center md:text-left">
-                <p class="font-bold text-white header-font">EdukasaunTimor.org</p>
-                <p class="text-xs text-slate-500">English Curriculum & Interactive Storybooks Project</p>
+    <!-- Decluttered Footer Layout matching image_7ad3e2.png exactly -->
+    <footer class="bg-slate-950 text-white py-10 border-t border-slate-900 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-1">
+                <h4 class="font-extrabold text-base text-white tracking-tight">EdukasaunTimor.org</h4>
+                <p class="text-xs text-slate-500 font-medium">Digital Library Project</p>
             </div>
-            <div class="text-center md:text-right space-y-1">
-                <p class="text-xs">&copy; 2026 EdukasaunTimor.org. All rights reserved.</p>
-                <p class="text-[10px] text-slate-600">Tetun Translations INL Compliant</p>
+            <div class="text-left md:text-right">
+                <p class="text-xs text-slate-500">© 2026 EdukasaunTimor.org. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Javascript Engine & Database -->
     <script>
-        // Storybook localized mock database mapped directly to Grade 8 Student book manuals and TETUN (INL) Rev. 2026-JAN_16 standards
-        const STORIES_DATABASE = [
+        // Dictionary aligned with "TETUN (INL) rev. 2026-JAN_29.txt"
+        const dictionaryTL = {
+            "student": "estudante",
+            "school": "eskola",
+            "morning": "dadeer",
+            "afternoon": "loron-kraik",
+            "evening": "kalan",
+            "night": "kalan",
+            "happy": "kontente / haksolok",
+            "sees": "haree",
+            "new": "foun",
+            "name": "naran",
+            "smiles": "hamnasa",
+            "backpack": "pasta",
+            "notebook": "kadernu",
+            "pen": "lapizeira",
+            "pencil": "lapis",
+            "ruler": "régua",
+            "gives": "fó",
+            "help": "tulun / ajuda",
+            "each": "ida-idak",
+            "other": "seluk",
+            "thank": "obrigada / obrigadu",
+            "hot": "manas",
+            "walking": "la'o daudaun",
+            "home": "uma",
+            "thirsty": "hamrook",
+            "tired": "kolen",
+            "wants": "hakarak",
+            "find": "hetan",
+            "mother": "inan",
+            "market": "merkadu",
+            "asks": "husu",
+            "man": "mane",
+            "excuse": "lisensa",
+            "straight": "loos",
+            "turn": "fila / dulas",
+            "left": "karuk",
+            "right": "kuana",
+            "church": "igreja",
+            "follows": "tuir",
+            "directions": "diresaun sira",
+            "very": "tebes / maka'as",
+            "sister": "mana / alin-feto",
+            "brother": "maun / alin-mane",
+            "ant": "nehek",
+            "grasshopper": "gafañotu",
+            "working": "serbisu daudaun",
+            "carrying": "lori daudaun",
+            "corn": "batar",
+            "back": "kotuk",
+            "walks": "la'o",
+            "slowly": "neineik",
+            "banana": "hudi",
+            "tree": "hun",
+            "guitar": "gitara",
+            "singing": "hananu",
+            "laughs": "hamnasa",
+            "rain": "udan",
+            "prepare": "prepara",
+            "wet": "udan / nabeen",
+            "season": "tempu",
+            "cold": "malirin",
+            "hungry": "hamlaha",
+            "knocks": "baku / dere",
+            "door": "odamatan",
+            "kind": "laran-di'ak / amigavel",
+            "generous": "laran-luak",
+            "lazy": "baruk-teen",
+            "hardworking": "badinas",
+            "town": "vila",
+            "busy": "batar-funan / okupadu",
+            "farmer": "toos-na'in",
+            "field": "natar / to'os",
+            "grow": "haburas",
+            "baker": "panadór",
+            "fresh": "fresku",
+            "bread": "paun",
+            "shop": "loja",
+            "sells": "fa'an",
+            "rice": "foos / etu",
+            "soap": "sabaun",
+            "teacher": "manorin",
+            "cleaner": "hamoos-na'in",
+            "beautiful": "furak",
+            "nurse": "enfermeira",
+            "clinic": "postu-klíniku",
+            "construction": "konstrusaun nian",
+            "worker": "serbisu-na'in",
+            "builds": "harii",
+            "strong": "forte",
+            "wall": "didin / moru",
+            "police": "polísia",
+            "officer": "ofisiál",
+            "whistle": "apitu",
+            "safe": "seguru",
+            "test": "ezame",
+            "easy": "fasil",
+            "piece": "pedasu",
+            "cake": "bolu",
+            "birthday": "loron moris",
+            "surprise": "sura-manta",
+            "calendar": "kalendáriu",
+            "tomorrow": "amañán / aban",
+            "shout": "hakilar",
+            "weather": "tempu",
+            "marathon": "maratona",
+            "stomach": "kabun",
+            "hurts": "moras",
+            "whispers": "bisibisi",
+            "finishes": "remata",
+            "rest": "deskansa"
+        };
+
+        const stories = [
             {
-                id: 1,
-                period: "1",
-                lesson: "Lesson 25",
+                id: "student-story",
+                level: "A1",
                 titleEn: "The New Student",
                 titleTl: "Estudante Foun",
-                desc: "Mario is at school. He sees a new student and helps her by sharing a pen.",
-                descTl: "Mario iha eskola laran. Nia haree estudante foun ida no ajuda nia hodi fahe lapizeira.",
-                coverSvg: `<svg viewBox="0 0 400 220" class="w-full h-full rounded-2xl" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100%" fill="#EEF2FF"/>
-                    <circle cx="200" cy="110" r="140" fill="#E0E7FF" opacity="0.6"/>
-                    <path d="M 0 160 Q 100 120, 200 160 T 400 160 L 400 220 L 0 220 Z" fill="#C7D2FE" opacity="0.8"/>
-                    <rect x="140" y="70" width="120" height="90" fill="#818CF8" rx="8"/>
-                    <polygon points="120,70 200,30 280,70" fill="#4F46E5"/>
-                    <rect x="190" y="120" width="20" height="40" fill="#312E81"/>
-                    <circle cx="160" cy="130" r="12" fill="#E2E8F0"/>
-                    <path d="M 148 155 Q 160 145, 172 155" stroke="#475569" stroke-width="4" fill="none"/>
-                    <circle cx="240" cy="130" r="12" fill="#F1F5F9"/>
-                    <path d="M 228 155 Q 240 145, 252 155" stroke="#475569" stroke-width="4" fill="none"/>
-                    <path d="M 200 135 L 205 120 L 210 135 Z" fill="#FBBF24"/>
-                </svg>`,
+                desc: "Mario meets a new classmate at school and practices bilingual greeting, sharing, and helping words.",
+                meta: "Grade 8 Unit 1 Story — CEFR A1 Standard",
+                illustration: `
+                    <svg viewBox="0 0 200 120" class="w-full h-full text-indigo-100 max-h-[300px]">
+                        <rect width="100%" height="100%" fill="#e0e7ff"/>
+                        <rect x="40" y="20" width="120" height="50" rx="4" fill="#15803d" stroke="#b45309" stroke-width="3"/>
+                        <text x="100" y="48" fill="#ffffff" font-family="Nunito" font-weight="bold" font-size="10" text-anchor="middle">ESKOLA</text>
+                        <circle cx="80" cy="90" r="14" fill="#fcd34d"/>
+                        <rect x="72" y="104" width="16" height="16" rx="3" fill="#4f46e5"/>
+                        <circle cx="120" cy="90" r="14" fill="#fbcfe8"/>
+                        <rect x="112" y="104" width="16" height="16" rx="3" fill="#db2777"/>
+                        <line x1="90" y1="95" x2="110" y2="95" stroke="#ef4444" stroke-width="2"/>
+                        <polygon points="110,95 106,92 106,98" fill="#ef4444"/>
+                    </svg>
+                `,
                 segments: [
                     {
                         en: "It is morning. Mario is at school. He is happy.",
-                        tl: "Dader-saan ona. Mario iha eskola. Nia kontente."
+                        tl: "Dadeer ona. Mário iha eskola. Nia kontente."
                     },
                     {
                         en: "He sees a new student.",
                         tl: "Nia haree estudante foun ida."
                     },
                     {
-                        en: "'Good morning,' says Mario. 'I am Mario. What is your name?'",
-                        tl: "'Dadeer di'ak,' Mario dehan. 'Ha'u-nia naran Mario. Ó-nia naran saida?'"
+                        en: "\"Good morning,\" says Mario. \"I am Mario. What is your name?\"",
+                        tl: "\"Dadeer di'ak,\" Mário hatete. \"Ha'u Mário. Ó-nia naran saida?\""
                     },
                     {
-                        en: "'Good morning,' she says. 'My name is Ana. I am from Baucau.' Mario smiles. 'Nice to meet you, Ana.'",
-                        tl: "'Dadeer di'ak,' nia hatán. 'Ha'u-nia naran Ana. Ha'u hosi Baucau.' Mario oin-midar. 'Nice to meet you, Ana (Kontente hasoru ó, Ana).'"
+                        en: "\"Good morning,\" she says. \"My name is Ana. I am from Baucau.\"",
+                        tl: "\"Dadeer di'ak,\" nia hatete. \"Ha'u-nia naran Ana. Ha'u hosi Baukau.\""
                     },
                     {
-                        en: "Ana opens her backpack. 'Oh no!' she says. 'I have a notebook. But I do not have a pen.'",
-                        tl: "Ana loke ninia pasta. 'Oh lae!' nia dehan. 'Ha'u iha kadernu. Maibé ha'u la iha lapizeira.'"
+                        en: "Mario smiles. \"Nice to meet you, Ana.\"",
+                        tl: "Mário hamnasa. \"Kontente hasoru ó, Ana.\""
                     },
                     {
-                        en: "Mario gives Ana a pen. 'Here,' he says. 'We help each other.'",
-                        tl: "Mario fó lapizeira ida ba Ana. 'Ne'e,' nia dehan. 'Ita tulun malu (We help each other).'"
+                        en: "Ana opens her backpack. \"Oh no!\" she says. \"I have a notebook. But I do not have a pen.\"",
+                        tl: "Ana loke ninia pasta. \"Oh lae!\" nia hatete. \"Ha'u iha kadernu ida. Maibé ha'u la iha lapizeira.\""
                     },
                     {
-                        en: "'Thank you!' says Ana.",
-                        tl: "'Obrigada!' Ana dehan."
+                        en: "Mario gives Ana a pen. \"Here,\" he says. \"We help each other.\"",
+                        tl: "Mário fó lapizeira ida ba Ana. \"Ne'e,\" nia hatete. \"Ita tulun malu.\""
+                    },
+                    {
+                        en: "\"Thank you!\" says Ana.",
+                        tl: "\"Obrigada!\" Ana hatete."
                     }
                 ],
-                quiz: {
-                    type: "matching",
-                    question: "Hapár liafuan sira ne'ebé korresponde ho loloos (Match the words correctly):",
-                    pairs: [
-                        { key: "backpack", val: "pasta" },
-                        { key: "notebook", val: "kadernu" },
-                        { key: "pen", val: "lapizeira" },
-                        { key: "help each other", val: "tulun malu" }
-                    ]
-                }
+                exercises: [
+                    {
+                        type: "multiple",
+                        question: "1. Where is Ana from?",
+                        options: ["Same", "Baucau", "Bobonaro", "Oecusse"],
+                        correct: 1
+                    },
+                    {
+                        type: "multiple",
+                        question: "2. What is missing in Ana's backpack?",
+                        options: ["A notebook", "A ruler", "A pen", "A map"],
+                        correct: 2
+                    },
+                    {
+                        type: "write",
+                        question: "3. Complete the sentence: \"We ______ each other.\"",
+                        correct: "help"
+                    }
+                ]
             },
             {
-                id: 2,
-                period: "1",
-                lesson: "Lesson 28",
+                id: "tom-lost-story",
+                level: "A1",
                 titleEn: "Tom is Lost",
                 titleTl: "Tom Lakon",
-                desc: "It is a hot afternoon. Tom is walking home. He gets directions to find the market.",
-                descTl: "Loron-kraik ida ne'ebé manas. Tom la'o hela ba uma. Nia husu diresaun atu hetan merkadu.",
-                coverSvg: `<svg viewBox="0 0 400 220" class="w-full h-full rounded-2xl" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100%" fill="#FEF3C7"/>
-                    <circle cx="340" cy="50" r="30" fill="#F59E0B" opacity="0.8"/>
-                    <path d="M 0 220 L 160 110 L 240 110 L 400 220" fill="#D97706" opacity="0.3"/>
-                    <path d="M 200 110 L 200 220" stroke="#FFF" stroke-width="4" stroke-dasharray="10, 10"/>
-                    <rect x="180" y="60" width="40" height="4" fill="#78350F"/>
-                    <polygon points="180,55 160,62 180,69" fill="#D97706"/>
-                    <rect x="198" y="60" width="4" height="60" fill="#78350F"/>
-                    <circle cx="90" cy="140" r="10" fill="#451A03"/>
-                    <path d="M 90 150 L 90 180 M 80 160 L 100 160 M 80 200 L 90 180 L 100 200" stroke="#451A03" stroke-width="4"/>
-                </svg>`,
+                desc: "Learn directions and sequence markers like 'first', 'then', and 'finally' to navigate successfully around town.",
+                meta: "Grade 8 Unit 2 Story — CEFR A1 Standard",
+                illustration: `
+                    <svg viewBox="0 0 200 120" class="w-full h-full text-amber-100 max-h-[300px]">
+                        <rect width="100%" height="100%" fill="#fef3c7"/>
+                        <path d="M10 90 L190 90 M70 10 L70 110" stroke="#94a3b8" stroke-width="12" fill="none"/>
+                        <rect x="15" y="20" width="40" height="30" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+                        <text x="35" y="38" fill="#1e293b" font-family="Nunito" font-weight="bold" font-size="7" text-anchor="middle">SCHOOL</text>
+                        <rect x="120" y="20" width="40" height="35" rx="3" fill="#fda4af" stroke="#e11d48" stroke-width="2"/>
+                        <text x="140" y="42" fill="#1e293b" font-family="Nunito" font-weight="bold" font-size="7" text-anchor="middle">MARKET</text>
+                        <circle cx="70" cy="90" r="10" fill="#f59e0b"/>
+                    </svg>
+                `,
                 segments: [
                     {
-                        en: "It is a hot afternoon. Tom is walking home. He is thirsty and tired.",
-                        tl: "Loroiak manas ida. Tom la'o hela ba uma. Nia hamrook no kolen."
-                    },
-                    {
-                        en: "He wants to find his mother. She is at the market.",
-                        tl: "Nia hakarak hetan ninia inan. Inan ne'e iha merkadu."
-                    },
-                    {
-                        en: "Tom asks a man, 'Excuse me. Can you tell me the way to the market?'",
-                        tl: "Tom husu ba katuas ida, 'Lisensa. Bele hatete ha'u dalan ba merkadu (Excuse me. Can you tell me the way to the market)?'"
-                    },
-                    {
-                        en: "The man says, 'Sure! Listen carefully.'",
-                        tl: "Katuas hatán, 'Klaru! Rona didi'ak.'"
-                    },
-                    {
-                        en: "The man points down the road and says, 'First, go straight. Next, turn left at the school.'",
-                        tl: "Katuas hatudu liman ba estrada no dehan, 'Dahuluk, la'o loos (go straight). Tuirmai, fila ba karuk (turn left) iha eskola.'"
-                    },
-                    {
-                        en: "'Then, walk past the church. Finally, turn right.'",
-                        tl: "'Depois, la'o liu (go past) igreja. Ikusliu, fila ba loos (turn right).'"
-                    },
-                    {
-                        en: "Tom follows the directions. He sees the market! Tom finds his mom. He is very happy!",
-                        tl: "Tom halo tuir diresaun. Nia haree merkadu! Tom hetan ninia inan. Nia kontente tebes!"
-                    }
-                ],
-                quiz: {
-                    type: "matching",
-                    question: "Hapár diresaun ho sira-nia signifikadu (Match directions with their meanings):",
-                    pairs: [
-                        { key: "go straight", val: "la'o loos" },
-                        { key: "turn left", val: "fila ba karuk" },
-                        { key: "turn right", val: "fila ba loos" },
-                        { key: "go past", val: "la'o liu" }
-                    ]
-                }
-            },
-            {
-                id: 3,
-                period: "3",
-                lesson: "Lesson 14",
-                titleEn: "Sister Ant and Brother Grasshopper",
-                titleTl: "Mana Nehek no Maun Gafañotu",
-                desc: "Sister Ant works hard to collect food for the wet season, while Brother Grasshopper only relaxes and sings.",
-                descTl: "Mana Nehek serbisu badinas atu halibur hahán ba tempu-udan, enkuantu Maun Gafañotu deskansa no kanta de'it.",
-                coverSvg: `<svg viewBox="0 0 400 220" class="w-full h-full rounded-2xl" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100%" fill="#ECFDF5"/>
-                    <circle cx="200" cy="110" r="140" fill="#D1FAE5" opacity="0.6"/>
-                    <path d="M 0 180 Q 200 130, 400 180 L 400 220 L 0 220 Z" fill="#059669" opacity="0.8"/>
-                    <path d="M 120 120 C 140 100, 200 100, 220 120" stroke="#10B981" stroke-width="8" stroke-linecap="round" fill="none"/>
-                    <circle cx="280" cy="150" r="10" fill="#047857"/>
-                    <circle cx="270" cy="155" r="8" fill="#047857"/>
-                    <path d="M 265 135 Q 275 125, 285 135 Z" fill="#FBBF24"/>
-                </svg>`,
-                segments: [
-                    {
-                        en: "One day, in the hot sun, Sister Ant is working very hard. She is carrying a big piece of corn on her back. She walks slowly to her house.",
-                        tl: "Loron ida, iha loraik manas okos, Mana Nehek serbisu badinas (working very hard). Nia hulan hodi lori batar pedasuk boot ida iha ninia kotuk. Nia la'o neineik ba ninia uma."
-                    },
-                    {
-                        en: "Brother Grasshopper is sitting under a banana tree. He is playing his guitar and singing. He looks at Sister Ant and laughs.",
-                        tl: "Maun Gafañotu tuur hela iha hudi-hun okos. Nia simu tokak ninia violinu/gitarra no kanta daudaun. Nia hateke ba Mana Nehek no hamnasa."
-                    },
-                    {
-                        en: "'Why are you working so hard?' asked the grasshopper. 'The sun is shining! Come and sing with me.'",
-                        tl: "'Tanbasá mak ó serbisu badinas tebes?' gafañotu husu. 'Loro-matan sa'e hela! Mai kanta hamutuk ho ha'u.'"
-                    },
-                    {
-                        en: "'No,' said the ant. 'I am collecting food for the wet season. You should work, too.' The grasshopper laughed again. 'The rain is far away. I want to relax.'",
-                        tl: "'Lae,' nehek dehan. 'Ha'u halibur hela hahán ba tempu-udan (wet season). Ó mós tenke serbisu.' Gafañotu hamnasa fali. 'Udan sei dook. Ha'u hakarak relaxa de'it.'"
-                    },
-                    {
-                        en: "Soon, the weather changes, and the wet season arrives. It rains every day, and the wind is strong.",
-                        tl: "Lakleur, kór-tempu muda, no tempu-udan (wet season) to'o mai. Udan tau loron-loron, no anin-boot."
-                    },
-                    {
-                        en: "Brother Grasshopper is very cold and hungry. He has no corn. He has no rice.",
-                        tl: "Maun Gafañotu malirin tebes no hamlaha. Nia la iha batar. Nia la iha foos."
-                    },
-                    {
-                        en: "He goes to Sister Ant's house and knocks on the door.",
-                        tl: "Nia bá Mana Nehek nia uma no dere odamatan."
-                    },
-                    {
-                        en: "'Please, Sister Ant,' he says. 'Give me some food. I am hungry.'",
-                        tl: "'Favór duni, Mana Nehek,' nia dehan. 'Fó uitoan hahán mai ha'u. Ha'u hamlaha.'"
-                    },
-                    {
-                        en: "Sister Ant opens the door. She is warm and has plenty of corn. She looks at the grasshopper. 'I worked hard in the dry season,' she says. 'You only played your guitar.'",
-                        tl: "Mana Nehek loke odamatan. Nia sente manas-moos no iha batar barak. Nia hateke ba gafañotu. 'Ha'u serbisu badinas iha bailoro (dry season),' nehek dehan. 'Ó halimar de'it ó-nia gitarra.'"
-                    },
-                    {
-                        en: "But Sister Ant is kind and generous. She gives some corn to the grasshopper.",
-                        tl: "Maibé Mana Nehek laran-luak (generous) no laran-di'ak. Nia fó batar balu ba gafañotu."
-                    },
-                    {
-                        en: "'Thank you,' says the grasshopper. 'Next year, I will not be lazy. I will be hardworking like you.'",
-                        tl: "'Obrigadu,' gafañotu dehan. 'Tinan oin, ha'u sei la baruk-teen (lazy) tan. Ha'u sei badinas (hardworking) hanesan ó.'"
-                    }
-                ],
-                quiz: {
-                    type: "matching",
-                    question: "Hapár hahalok ho sira-nia kór/signifikadu (Match behaviors with meanings):",
-                    pairs: [
-                        { key: "hardworking", val: "badinas" },
-                        { key: "lazy", val: "baruk-teen" },
-                        { key: "wet season", val: "tempu-udan" },
-                        { key: "dry season", val: "bailoro" }
-                    ]
-                }
-            }
-        ];
-
-        // Global states
-        let globalFontSize = "base"; // base, lg, xl, 2xl
-        let currentLanguageMode = "bilingual"; // bilingual, english, tetun
-        let selectedStory = null;
-        let isSpeaking = false;
-        let speechUtterance = null;
-        let selectedMatchingKey = null;
-
-        // Initialize localStorage progress tracking
-        let readingProgress = JSON.parse(localStorage.getItem('edu_timor_progress')) || {};
-
-        window.onload = function () {
-            // Check cache status
-            if (localStorage.getItem('edu_timor_offline_cached') === 'true') {
-                document.getElementById('offline-banner').classList.remove('hidden');
-            }
-            renderStoriesShelf();
-
-            // Register Service Worker for PWA Offline Mechanics
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Offline PWA Service Worker Registered!', reg))
-                    .catch(err => console.error('Service Worker registration failed:', err));
-            }
-        }
-
-        // Render Bookshelf View
-        function renderStoriesShelf() {
-            const grid = document.getElementById('stories-grid');
-            grid.innerHTML = "";
-
-            STORIES_DATABASE.forEach(story => {
-                const isCompleted = readingProgress[story.id] ? true : false;
-                const card = document.createElement('div');
-                card.className = "bg-white rounded-3xl overflow-hidden story-card-shadow border border-slate-100 flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-300";
-                
-                card.innerHTML = `
-                    <div>
-                        <div class="p-3">
-                            ${story.coverSvg}
-                        </div>
-                        <div class="px-6 py-4 space-y-2">
-                            <div class="flex items-center justify-between">
-                                <span class="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-                                    Period ${story.period}
-                                </span>
-                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${story.lesson}</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 header-font leading-tight mt-1">${story.titleEn}</h3>
-                            <h4 class="text-sm font-semibold text-slate-500">${story.titleTl}</h4>
-                            <p class="text-xs text-slate-500 font-light line-clamp-2 mt-2">${story.desc}</p>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 pt-2 border-t border-slate-50 flex items-center justify-between">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-2.5 h-2.5 rounded-full ${isCompleted ? 'bg-emerald-500' : 'bg-slate-300'}"></span>
-                            <span class="text-[11px] font-bold text-slate-500">${isCompleted ? 'Lee hotu (Done)' : 'Seidauk (Not Read)'}</span>
-                        </div>
-                        <button onclick="openStoryBook(${story.id})" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 px-4 rounded-xl shadow-md transition-all active:scale-95">
-                            Lee (Read)
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Navigate views
-        function navigate(view) {
-            stopSpeechNarrator();
-            if (view === 'shelf') {
-                document.getElementById('shelf-view').className = "space-y-8 block";
-                document.getElementById('reader-view').className = "space-y-8 hidden";
-                document.getElementById('btn-text-size').classList.add('hidden');
-                renderStoriesShelf();
-            } else if (view === 'reader') {
-                document.getElementById('shelf-view').className = "space-y-8 hidden";
-                document.getElementById('reader-view').className = "space-y-8 block";
-                document.getElementById('btn-text-size').classList.remove('hidden');
-            }
-        }
-
-        // Open specific story
-        function openStoryBook(storyId) {
-            selectedStory = STORIES_DATABASE.find(s => s.id === storyId);
-            if (!selectedStory) return;
-
-            document.getElementById('reader-meta').innerText = `Period ${selectedStory.period} • ${selectedStory.lesson}`;
-            document.getElementById('reader-title-en').innerText = selectedStory.titleEn;
-            document.getElementById('reader-title-tl').innerText = selectedStory.titleTl;
-            document.getElementById('reader-illustration').innerHTML = selectedStory.coverSvg;
-
-            renderStorySegments();
-            renderInteractiveQuiz();
-            navigate('reader');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Render Bilingual story segments
-        function renderStorySegments() {
-            const container = document.getElementById('story-segments');
-            container.innerHTML = "";
-
-            selectedStory.segments.forEach((seg, index) => {
-                const segDiv = document.createElement('div');
-                segDiv.className = "segment-block p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100 space-y-2 cursor-pointer";
-                segDiv.onclick = () => readTextAloud(seg.en, segDiv);
-
-                let content = "";
-                if (currentLanguageMode === 'bilingual' || currentLanguageMode === 'english') {
-                    content += `<p class="english-segment text-${globalFontSize} font-medium text-slate-900 leading-relaxed">${seg.en}</p>`;
-                }
-                if (currentLanguageMode === 'bilingual' || currentLanguageMode === 'tetun') {
-                    content += `<p class="tetun-segment text-sm font-semibold text-slate-500 leading-relaxed">${seg.tl}</p>`;
-                }
-
-                // Speaker Icon hint
-                content += `
-                    <div class="flex items-center gap-1.5 pt-1">
-                        <span class="p-1 bg-indigo-50 text-indigo-600 rounded-md">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
-                            </svg>
-                        </span>
-                        <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-wider">Tap to Listen (Rona)</span>
-                    </div>
-                `;
-
-                segDiv.innerHTML = content;
-                container.appendChild(segDiv);
-            });
-        }
-
-        // Toggle text sizes globally
-        function toggleGlobalTextSize() {
-            if (globalFontSize === "base") globalFontSize = "lg";
-            else if (globalFontSize === "lg") globalFontSize = "xl";
-            else if (globalFontSize === "xl") globalFontSize = "2xl";
-            else globalFontSize = "base";
-            renderStorySegments();
-        }
-
-        // Set Language layout modes
-        function setLanguageMode(mode) {
-            currentLanguageMode = mode;
-            document.querySelectorAll('.lang-mode-btn').forEach(btn => {
-                if (btn.getAttribute('data-mode') === mode) {
-                    btn.className = "lang-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-slate-800 shadow-sm";
-                } else {
-                    btn.className = "lang-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900";
-                }
-            });
-            renderStorySegments();
-        }
-
-        // Speech Narrator using offline browser SpeechSynthesis
-        function readTextAloud(text, element) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                
-                // Highlight active block
-                document.querySelectorAll('.segment-block').forEach(el => el.classList.remove('bg-yellow-50', 'border-yellow-200'));
-                if (element) {
-                    element.classList.add('bg-yellow-50', 'border-yellow-200');
-                }
-
-                speechUtterance = new SpeechSynthesisUtterance(text);
-                const selectedSpeed = parseFloat(document.getElementById('audio-speed').value);
-                speechUtterance.rate = selectedSpeed;
-                
-                // Try selecting English voice
-                const voices = window.speechSynthesis.getVoices();
-                const enVoice = voices.find(v => v.lang.startsWith('en'));
-                if (enVoice) speechUtterance.voice = enVoice;
-
-                speechUtterance.onend = function() {
-                    if (element) {
-                        element.classList.remove('bg-yellow-50', 'border-yellow-200');
-                    }
-                    isSpeaking = false;
-                    document.getElementById('play-icon').setAttribute('d', 'M8 5v14l11-7z');
-                };
-
-                window.speechSynthesis.speak(speechUtterance);
-                isSpeaking = true;
-                document.getElementById('play-icon').setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
-            } else {
-                showAlert("Speech Synthesis is not supported on your offline device.", "bg-rose-100", "text-rose-700");
-            }
-        }
-
-        function toggleAudioReader() {
-            if (isSpeaking) {
-                stopSpeechNarrator();
-            } else {
-                // Read the whole story sequentially
-                let fullText = selectedStory.segments.map(s => s.en).join(". ");
-                readTextAloud(fullText, null);
-            }
-        }
-
-        function stopSpeechNarrator() {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
-            isSpeaking = false;
-            const playButton = document.getElementById('play-icon');
-            if (playButton) {
-                playButton.setAttribute('d', 'M8 5v14l11-7z');
-            }
-        }
-
-        // Render Interactive matches
-        function renderInteractiveQuiz() {
-            const container = document.getElementById('quiz-container');
-            container.innerHTML = `
-                <p class="text-xs text-slate-500 leading-relaxed font-light">${selectedStory.quiz.question}</p>
-                <div class="grid grid-cols-2 gap-4 pt-4">
-                    <div id="matching-keys" class="space-y-2"></div>
-                    <div id="matching-values" class="space-y-2"></div>
-                </div>
-                <button onclick="resetMatchGame()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2 rounded-xl transition-all">Hamoos fali (Reset)</button>
-            `;
-
-            const keysContainer = document.getElementById('matching-keys');
-            const valuesContainer = document.getElementById('matching-values');
-
-            // Scramble values to make it a fun game
-            const scrambledPairs = [...selectedStory.quiz.pairs].sort(() => Math.random() - 0.5);
-
-            selectedStory.quiz.pairs.forEach(pair => {
-                const keyBtn = document.createElement('button');
-                keyBtn.className = "w-full text-left px-3 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold hover:border-indigo-400 bg-slate-50 transition-all text-slate-800 focus:outline-none";
-                keyBtn.innerText = pair.key;
-                keyBtn.onclick = () => selectKey(pair.key, keyBtn);
-                keysContainer.appendChild(keyBtn);
-            });
-
-            scrambledPairs.forEach(pair => {
-                const valBtn = document.createElement('button');
-                valBtn.className = "w-full text-left px-3 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold hover:border-indigo-400 bg-slate-50 transition-all text-slate-800 focus:outline-none";
-                valBtn.innerText = pair.val;
-                valBtn.onclick = () => verifyMatch(pair.val, valBtn);
-                valuesContainer.appendChild(valBtn);
-            });
-        }
-
-        function selectKey(key, element) {
-            selectedMatchingKey = key;
-            document.querySelectorAll('#matching-keys button').forEach(b => b.classList.remove('ring-2', 'ring-indigo-600', 'bg-indigo-50'));
-            element.classList.add('ring-2', 'ring-indigo-600', 'bg-indigo-50');
-        }
-
-        function verifyMatch(val, element) {
-            if (!selectedMatchingKey) {
-                showAlert("Hili lai liafuan iha karuk! (Please select a word on the left first!)", "bg-amber-100", "text-amber-800");
-                return;
-            }
-
-            const truePair = selectedStory.quiz.pairs.find(p => p.key === selectedMatchingKey);
-            if (truePair && truePair.val === val) {
-                // Correct match!
-                showAlert("Loos duni! (Correct match!)", "bg-emerald-100", "text-emerald-800");
-                
-                // Colorize match buttons as successful
-                element.className = "w-full text-left px-3 py-2.5 rounded-xl border border-emerald-500 bg-emerald-50 text-emerald-800 text-xs font-bold pointer-events-none";
-                
-                document.querySelectorAll('#matching-keys button').forEach(b => {
-                    if (b.innerText === selectedMatchingKey) {
-                        b.className = "w-full text-left px-3 py-2.5 rounded-xl border border-emerald-500 bg-emerald-50 text-emerald-800 text-xs font-bold pointer-events-none";
-                    }
-                });
-
-                selectedMatchingKey = null;
-                checkStoryCompletion();
-            } else {
-                showAlert("Seidauk loos! Koko fali. (Incorrect! Try again.)", "bg-rose-100", "text-rose-800");
-                element.classList.add('animate-bounce');
-                setTimeout(() => element.classList.remove('animate-bounce'), 800);
-            }
-        }
-
-        function resetMatchGame() {
-            renderInteractiveQuiz();
-        }
-
-        function checkStoryCompletion() {
-            // If all buttons are solved, mark progress as 100%
-            const remaining = document.querySelectorAll('#matching-values button:not(.pointer-events-none)');
-            if (remaining.length === 0) {
-                readingProgress[selectedStory.id] = true;
-                localStorage.setItem('edu_timor_progress', JSON.stringify(readingProgress));
-                showAlert("Parabéns! Ó lee no haktuir hotu ona istória ne'e! (Congratulations! You completed the lesson!)", "bg-indigo-100", "text-indigo-800");
-            }
-        }
-
-        // Cache files offline
-        function triggerOfflineCache() {
-            localStorage.setItem('edu_timor_offline_cached', 'true');
-            document.getElementById('offline-banner').classList.remove('hidden');
-            showAlert("Kursu hotu kaxidu tiha ona! (All offline resources are successfully stored!)", "bg-emerald-100", "text-emerald-800");
-        }
-
-        // Filter stories on search
-        function filterStories() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            document.querySelectorAll('#stories-grid > div').forEach(card => {
-                const enTitle = card.querySelector('h3').innerText.toLowerCase();
-                const tlTitle = card.querySelector('h4').innerText.toLowerCase();
-                if (enTitle.includes(query) || tlTitle.includes(query)) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        }
-
-        // Filter by curriculum Period
-        function filterPeriod(period) {
-            document.querySelectorAll('.period-filter-btn').forEach(btn => {
-                if (btn.getAttribute('data-period') === period) {
-                    btn.className = "period-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white";
-                } else {
-                    btn.className = "period-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-600";
-                }
-            });
-
-            document.querySelectorAll('#stories-grid > div').forEach(card => {
-                const cardPeriodTag = card.querySelector('span').innerText.trim();
-                if (period === 'all' || cardPeriodTag.includes(`Period ${period}`)) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        }
-
-        // Customs Toast system
-        function showAlert(msg, bgClass, textClass) {
-            const alertBox = document.getElementById('alert-box');
-            const iconContainer = document.getElementById('alert-icon-container');
-            
-            iconContainer.className = `p-2 rounded-xl shrink-0 ${bgClass} ${textClass}`;
-            iconContainer.innerHTML = `
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-            `;
-
-            document.getElementById('alert-title').innerText = "Notifikasaun (System Alert)";
-            document.getElementById('alert-desc').innerText = msg;
-
-            alertBox.classList.remove('opacity-0', 'translate-y-[-100px]');
-            alertBox.classList.add('opacity-100', 'translate-y-0');
-
-            setTimeout(() => {
-                alertBox.classList.add('opacity-0', 'translate-y-[-100px]');
-                alertBox.classList.remove('opacity-100', 'translate-y-0');
-            }, 4000);
-        }
-    </script>
-</body>
-</html>
+                        en: "It is a hot afternoon. Tom is walking home. He is thirsty and
