@@ -64,8 +64,9 @@
         </div>
     </header>
 
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 py-8">
         
+        <!-- SHELF VIEW (DASHBOARD) -->
         <section id="shelf-view" class="space-y-8">
             <div class="relative bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-3xl p-6 sm:p-10 text-white overflow-hidden shadow-xl shadow-indigo-100">
                 <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-12 translate-y-12">
@@ -101,7 +102,8 @@
             <div id="stories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
-        <section id="reader-view" class="space-y-6 hidden">
+        <!-- PROGRESSIVE SCROLLING READER VIEW -->
+        <section id="reader-view" class="space-y-8 hidden">
             <!-- Back Navigation & Action Bar -->
             <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
                 <button onclick="navigate('shelf')" class="flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-indigo-600 transition-colors">
@@ -120,58 +122,31 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <div class="lg:col-span-5 space-y-4 lg:sticky lg:top-20">
-                    
-                    <!-- Dynamic Page Illustration Container -->
-                    <div class="relative w-full bg-white rounded-3xl p-2 border border-slate-100 shadow-sm overflow-hidden">
-                        <div id="reader-illustration" class="w-full bg-slate-50 rounded-2xl overflow-hidden aspect-video flex items-center justify-center border border-slate-100/50 shadow-inner">
-                            <!-- JS programmatically loads image or renders vector illustration safely -->
-                        </div>
-                        
-                        <!-- Page Slide Controls -->
-                        <div class="flex items-center justify-between px-3 py-2 mt-2 bg-slate-50 rounded-xl">
-                            <button id="prev-page-btn" onclick="prevSegmentPage()" class="p-1 rounded-lg hover:bg-slate-200 text-slate-600 transition-colors disabled:opacity-40" disabled>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
-                            </button>
-                            <span id="page-indicator-text" class="text-xs font-bold text-slate-500 font-nunito select-none">Page 1 of 8</span>
-                            <button id="next-page-btn" onclick="nextSegmentPage()" class="p-1 rounded-lg hover:bg-slate-200 text-slate-600 transition-colors disabled:opacity-40">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
-                            </button>
-                        </div>
-                    </div>
+            <!-- Story Header Meta Information -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 space-y-3 shadow-sm text-center">
+                <span id="reader-meta" class="inline-block text-[10px] tracking-wider uppercase bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold"></span>
+                <h2 id="reader-title-en" class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight font-nunito"></h2>
+                <p id="reader-title-tl" class="text-base sm:text-lg font-bold text-slate-500 italic"></p>
+            </div>
 
-                    <!-- Meta information box -->
-                    <div class="bg-white p-5 rounded-3xl border border-slate-100 space-y-2 shadow-sm">
-                        <span id="reader-meta" class="inline-block text-[10px] tracking-wider uppercase bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold"></span>
-                        <h2 id="reader-title-en" class="text-xl font-extrabold text-slate-800 leading-tight"></h2>
-                        <p id="reader-title-tl" class="text-sm font-bold text-slate-500 italic"></p>
-                    </div>
+            <!-- Progressive Illustrated Book Feed (Image -> Text -> Divider -> Image -> Text) -->
+            <div id="progressive-book-feed" class="space-y-12">
+                <!-- Programmatically populated by segments -->
+            </div>
+
+            <!-- Bilingual Study Activities (Displayed under the progressive feed) -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="text-lg font-black text-slate-800 font-nunito">Interactive Study Activities (Atividade Interativu)</h3>
+                    <span class="text-[10px] bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded-full border border-emerald-100">Bilingual Support</span>
                 </div>
-
-                <div class="lg:col-span-7 space-y-4">
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-4">
-                        <h3 class="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Story Text (Testu Istória)</h3>
-                        <div id="reader-segments-container" class="space-y-3 max-h-[420px] overflow-y-auto pr-2 custom-scrollbar">
-                            <!-- Populated dynamically via JS -->
-                        </div>
-                    </div>
-
-                    <!-- Bilingual Study Activities -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
-                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <h3 class="text-sm font-black text-slate-800 font-nunito">Interactive Study Activities (Atividade Interativu)</h3>
-                            <span class="text-[10px] bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded-full border border-emerald-100">Bilingual Support</span>
-                        </div>
-                        <div id="reader-exercises-container" class="space-y-6">
-                            <!-- Populated dynamically via JS -->
-                        </div>
-                        <div class="pt-4 flex justify-end">
-                            <button onclick="submitExercises()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 px-6 rounded-xl shadow-md shadow-emerald-100 transition-all active:scale-95">
-                                Submit Answers (Submete Resposta)
-                            </button>
-                        </div>
-                    </div>
+                <div id="reader-exercises-container" class="space-y-6">
+                    <!-- Populated dynamically via JS -->
+                </div>
+                <div class="pt-4 flex justify-end">
+                    <button onclick="submitExercises()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 px-6 rounded-xl shadow-md shadow-emerald-100 transition-all active:scale-95">
+                        Submit Answers (Submete Resposta)
+                    </button>
                 </div>
             </div>
         </section>
@@ -196,7 +171,7 @@
     <div id="toast-container" class="fixed bottom-6 right-6 z-50 pointer-events-none space-y-3"></div>
 
     <script>
-    // Bilingual CEFR aligned stories database with exact asset mapping
+    // Bilingual CEFR aligned stories database with exact progressive asset mapping
     const stories = [
         {
             id: "student-story",
@@ -326,9 +301,9 @@
                 {
                     en: "One day, in the hot sun, Sister Ant is working very hard. She is carrying a big piece of corn on her back. She walks slowly to her house.",
                     tl: "Loron ida, iha loro-manas okos, Mana Nehek badinas tebes. Nia lori batar pedasu boot ida iha ninia kotuk. Nia la'o neineik ba ninia uma.",
-                    imageSrc: "assets/Story-SisterAunt-1.webp",
+                    imageSrc: "Story-SisterAunt-1.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full">
+                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-800">
                             <rect width="100%" height="100%" fill="#d1fae5"/>
                             <circle cx="30" cy="30" r="12" fill="#fbbf24"/>
                             <text x="100" y="60" fill="#047857" font-weight="bold" font-size="10" text-anchor="middle">Page 1: Dry Season</text>
@@ -338,9 +313,9 @@
                 {
                     en: "Brother Grasshopper is sitting under a banana tree. He is playing his guitar and singing. He looks at Sister Ant and laughs.",
                     tl: "Maun Gafañotu tuur hela iha hudi-hun okos. Nia toca gitara no hananu. Nia hateke ba Mana Nehek no hamnasa.",
-                    imageSrc: "assets/Story-SisterAunt-2.webp",
+                    imageSrc: "Story-SisterAunt-2.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full">
+                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-800">
                             <rect width="100%" height="100%" fill="#d1fae5"/>
                             <text x="100" y="60" fill="#047857" font-weight="bold" font-size="10" text-anchor="middle">Page 2: Banana Tree</text>
                         </svg>
@@ -349,9 +324,9 @@
                 {
                     en: "“Why are you working so hard?” asked the grasshopper. “The sun is shining! Come and sing with me.”",
                     tl: "“Tanbasá mak ó serbisu maka'as?” gafañotu husu. “Loro-manas daudaun! Mai hananu hamutuk ho ha'u.”",
-                    imageSrc: "assets/Story-SisterAunt-3.webp",
+                    imageSrc: "Story-SisterAunt-3.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full">
+                        <svg viewBox="0 0 200 120" class="w-full h-full text-amber-800">
                             <rect width="100%" height="100%" fill="#fef08a"/>
                             <text x="100" y="65" fill="#b45309" font-family="Nunito" font-weight="bold" font-size="12" text-anchor="middle">Page 3: Sing with me!</text>
                         </svg>
@@ -360,9 +335,9 @@
                 {
                     en: "“No,” said the ant. “I am collecting food for the wet season. You should work, too.” The grasshopper laughed again. “The rain is far away. I want to relax.”",
                     tl: "“Lae,” nehek hatete. “Ha'u halibur hela hahán ba tempu-udan. Ó mós tenke serbisu.” Gafañotu hamnasa fali. “Udan sei dook. Ha'u hakarak deskansa.”",
-                    imageSrc: "assets/Story-SisterAunt-4.webp",
+                    imageSrc: "Story-SisterAunt-4.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full">
+                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-800">
                             <rect width="100%" height="100%" fill="#d1fae5"/>
                             <text x="100" y="65" fill="#1e293b" font-weight="bold" font-size="9" text-anchor="middle">Page 4: Food Storage</text>
                         </svg>
@@ -371,9 +346,9 @@
                 {
                     en: "Soon, the weather changes, and the wet season arrives. It rains every day, and the wind is strong.",
                     tl: "Lakleur, klima troka, no tempu-udan to'o mai. Udan tau loroloron, no anin boot.",
-                    imageSrc: "assets/Story-SisterAunt-5.webp",
+                    imageSrc: "Story-SisterAunt-5.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full">
+                        <svg viewBox="0 0 200 120" class="w-full h-full text-slate-100">
                             <rect width="100%" height="100%" fill="#94a3b8"/>
                             <text x="100" y="65" fill="#e2e8f0" font-weight="bold" font-size="10" text-anchor="middle">Page 5: Rain & Wind</text>
                         </svg>
@@ -382,9 +357,9 @@
                 {
                     en: "Brother Grasshopper is very cold and hungry. He has no corn. He has no rice. He goes to Sister Ant's house and knocks on the door.",
                     tl: "Maun Gafañotu sente malirin no hamlaha tebes. Nia la iha batar. Nia la iha foos. Nia bá Mana Nehek nia uma no dere odamatan.",
-                    imageSrc: "assets/Story-SisterAunt-6.webp",
+                    imageSrc: "Story-SisterAunt-6.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full">
+                        <svg viewBox="0 0 200 120" class="w-full h-full text-red-500">
                             <rect width="100%" height="100%" fill="#475569"/>
                             <text x="100" y="65" fill="#ef4444" font-weight="bold" font-size="10" text-anchor="middle">Page 6: Knocking</text>
                         </svg>
@@ -393,9 +368,9 @@
                 {
                     en: "“Please, Sister Ant,” he says. “Give me some food. I am hungry.”",
                     tl: "“Favór ida, Mana Nehek,” nia hatete. “Fó hahán uitoan mai ha'u. Ha'u hamlaha.”",
-                    imageSrc: "assets/Story-SisterAunt-7.webp",
+                    imageSrc: "Story-SisterAunt-7.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full">
+                        <svg viewBox="0 0 200 120" class="w-full h-full text-slate-300">
                             <rect width="100%" height="100%" fill="#1e293b"/>
                             <text x="100" y="65" fill="#f8fafc" font-family="Nunito" font-weight="bold" font-size="12" text-anchor="middle">Page 7: Hungry Grasshopper</text>
                         </svg>
@@ -404,9 +379,9 @@
                 {
                     en: "Sister Ant opens the door. She is warm and has plenty of corn. She looks at the grasshopper. “I worked hard in the dry season,” she says. “You only played your guitar.” But Sister Ant is kind and generous. She gives some corn to the grasshopper. “Thank you,” says the grasshopper. “Next year, I will not be lazy. I will be hardworking like you.”",
                     tl: "Mana Nehek loke odamatan. Nia sente manas (komfortavel) no iha batar barak. Nia hateke ba gafañotu. “Ha'u serbisu maka'as iha tempu-bailoro,” nia hatete. “Ó toca de'it gitara.” Maibé Mana Nehek laran-di'ak no laran-luak. Nia fó batar uitoan ba gafañotu. “Obrigadu,” gafañotu hatete. “Tinan oin, ha'u sei la sai baruk-teen. Ha'u sei badinas hanesan ó.”",
-                    imageSrc: "assets/Story-SisterAunt-8.webp",
+                    imageSrc: "Story-SisterAunt-8.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full">
+                        <svg viewBox="0 0 200 120" class="w-full h-full text-slate-800">
                             <rect width="100%" height="100%" fill="#fef08a"/>
                             <text x="100" y="65" fill="#1e293b" font-family="Nunito" font-weight="bold" font-size="12" text-anchor="middle">Page 8: Friendly Ending</text>
                         </svg>
@@ -503,7 +478,6 @@
 
     let currentStory = null;
     let selectedFilter = 'all';
-    let currentSegmentIndex = 0; // Tracks the currently active story slide page
 
     window.onload = function() {
         renderStories();
@@ -516,6 +490,7 @@
         if (viewId === 'shelf') {
             shelf.classList.remove('hidden');
             reader.classList.add('hidden');
+            window.speechSynthesis.cancel();
         } else {
             shelf.classList.add('hidden');
             reader.classList.remove('hidden');
@@ -589,19 +564,10 @@
             `;
             grid.appendChild(card);
 
-            // Programmatic image checker resolves alt text markup leakage bugs
+            // Programmatic safe image validation loop
             const targetContainer = document.getElementById(`cover-loader-${story.id}`);
             if (hasCoverImg) {
-                const imgCheck = new Image();
-                imgCheck.src = firstSegment.imageSrc;
-                imgCheck.className = "w-full h-full object-cover rounded-2xl transition-all duration-300";
-                imgCheck.alt = story.titleEn;
-                imgCheck.onload = () => {
-                    targetContainer.appendChild(imgCheck);
-                };
-                imgCheck.onerror = () => {
-                    targetContainer.innerHTML = firstSegment.illustration;
-                };
+                tryLoadingImage(firstSegment.imageSrc, targetContainer, firstSegment.illustration, story.titleEn);
             } else {
                 targetContainer.innerHTML = firstSegment.illustration;
             }
@@ -617,110 +583,92 @@
         if (!story) return;
 
         currentStory = story;
-        currentSegmentIndex = 0; // Reset back to page 1
         
         document.getElementById('reader-meta').innerText = story.meta;
         document.getElementById('reader-title-en').innerText = story.titleEn;
         document.getElementById('reader-title-tl').innerText = story.titleTl;
 
-        renderActiveSegmentPage();
-        renderSegments();
+        renderProgressiveBookFeed();
         renderExercises();
         navigate('reader');
     }
 
-    function renderActiveSegmentPage() {
+    // Programmatically tries loading the image from standard relative paths, falling back to SVG if both fail
+    function tryLoadingImage(fileName, targetEl, fallbackSvg, altText) {
+        // Try the standard "assets/" relative path first
+        const primaryPath = "assets/" + fileName;
+        const fallbackPath = "./" + fileName;
+
+        const img = new Image();
+        img.className = "w-full h-full object-cover rounded-2xl transition-all duration-300";
+        img.alt = altText;
+        
+        img.onload = () => {
+            targetEl.innerHTML = '';
+            targetEl.appendChild(img);
+        };
+        
+        img.onerror = () => {
+            // If primary assets folder fails, try loading directly from root relative
+            const secondTry = new Image();
+            secondTry.className = "w-full h-full object-cover rounded-2xl transition-all duration-300";
+            secondTry.alt = altText;
+            secondTry.onload = () => {
+                targetEl.innerHTML = '';
+                targetEl.appendChild(secondTry);
+            };
+            secondTry.onerror = () => {
+                // If all fails, render beautiful inline vector drawing safely
+                targetEl.innerHTML = fallbackSvg;
+            };
+            secondTry.src = fallbackPath;
+        };
+        
+        img.src = primaryPath;
+    }
+
+    function renderProgressiveBookFeed() {
+        const feedContainer = document.getElementById('progressive-book-feed');
+        feedContainer.innerHTML = ''; // Clear prior entries safely
+
         if (!currentStory) return;
-        const segment = currentStory.segments[currentSegmentIndex];
-        const container = document.getElementById('reader-illustration');
-        container.innerHTML = ''; // Clear container cleanly
-
-        if (segment.imageSrc) {
-            const pageImg = new Image();
-            pageImg.src = segment.imageSrc;
-            pageImg.className = "w-full h-full object-cover rounded-2xl transition-all duration-300";
-            pageImg.alt = "Scene Illustration";
-            
-            // WebP fallback fallback loads beautiful vector drawings in remote timor schools
-            pageImg.onerror = () => {
-                container.innerHTML = segment.illustration;
-            };
-            pageImg.onload = () => {
-                container.appendChild(pageImg);
-            };
-        } else {
-            container.innerHTML = segment.illustration;
-        }
-
-        // Highlight right panel matching segment rows
-        document.querySelectorAll('.segment-row-card').forEach((card, idx) => {
-            if (idx === currentSegmentIndex) {
-                card.classList.add('border-indigo-400', 'bg-indigo-50/50', 'ring-2', 'ring-indigo-100');
-                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } else {
-                card.classList.remove('border-indigo-400', 'bg-indigo-50/50', 'ring-2', 'ring-indigo-100');
-            }
-        });
-
-        // Update slider pagination controls
-        document.getElementById('page-indicator-text').innerText = `Page ${currentSegmentIndex + 1} of ${currentStory.segments.length}`;
-        document.getElementById('prev-page-btn').disabled = currentSegmentIndex === 0;
-        document.getElementById('next-page-btn').disabled = currentSegmentIndex === currentStory.segments.length - 1;
-    }
-
-    function selectSegmentPage(idx) {
-        currentSegmentIndex = idx;
-        renderActiveSegmentPage();
-    }
-
-    function prevSegmentPage() {
-        if (currentSegmentIndex > 0) {
-            currentSegmentIndex--;
-            renderActiveSegmentPage();
-        }
-    }
-
-    function nextSegmentPage() {
-        if (currentSegmentIndex < currentStory.segments.length - 1) {
-            currentSegmentIndex++;
-            renderActiveSegmentPage();
-        }
-    }
-
-    function renderSegments() {
-        const container = document.getElementById('reader-segments-container');
-        container.innerHTML = '';
 
         currentStory.segments.forEach((seg, index) => {
-            const row = document.createElement('div');
-            row.className = "segment-row-card p-4 bg-slate-50/60 hover:bg-indigo-50/30 rounded-2xl border border-slate-100 transition-all space-y-2 group relative cursor-pointer";
-            row.onclick = () => selectSegmentPage(index);
-            row.innerHTML = `
-                <div class="flex items-start justify-between gap-4">
-                    <div class="space-y-1.5 flex-1">
-                        <div class="flex items-center gap-2">
-                            <span class="text-[9px] bg-slate-200 text-slate-600 font-bold px-1.5 py-0.5 rounded">Page ${index + 1}</span>
-                        </div>
-                        <p class="text-sm font-semibold text-slate-800 leading-relaxed">${seg.en}</p>
-                        <p class="text-xs font-bold text-slate-500 italic leading-relaxed">${seg.tl}</p>
+            const pageBlock = document.createElement('div');
+            pageBlock.className = "space-y-4 bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative";
+
+            pageBlock.innerHTML = `
+                <!-- Illustration Frame -->
+                <div class="aspect-video w-full bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center relative shadow-inner">
+                    <div id="progressive-image-${index}" class="w-full h-full flex items-center justify-center">
+                        <!-- Loaded dynamically -->
                     </div>
-                    <button onclick="event.stopPropagation(); speakSegment(${index})" class="text-slate-400 hover:text-indigo-600 transition-colors p-1.5 rounded-lg hover:bg-white/80" title="Listen to this line">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                </div>
+
+                <!-- Text Block + Speak Action -->
+                <div class="flex items-start justify-between gap-4 pt-2">
+                    <div class="space-y-2 flex-1">
+                        <span class="inline-block text-[9px] bg-indigo-50 text-indigo-600 font-bold px-2 py-0.5 rounded-md font-nunito uppercase tracking-wider">Page ${index + 1}</span>
+                        <h4 class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed font-nunito">${seg.en}</h4>
+                        <p class="text-sm font-semibold text-slate-500 italic leading-relaxed">${seg.tl}</p>
+                    </div>
+                    <button onclick="speakSegment(${index})" class="text-slate-400 hover:text-indigo-600 hover:bg-slate-50 transition-all p-2 rounded-xl border border-slate-100 shadow-sm" title="Listen to this line">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
                         </svg>
                     </button>
                 </div>
             `;
-            container.appendChild(row);
-        });
+            feedContainer.appendChild(pageBlock);
 
-        // Highlight first item on open
-        if (currentStory.segments.length > 0) {
-            const firstRow = container.querySelector('.segment-row-card');
-            if (firstRow) {
-                firstRow.classList.add('border-indigo-400', 'bg-indigo-50/50', 'ring-2', 'ring-indigo-100');
+            // Programmatically resolve illustration path matching progressive structure
+            const targetContainer = document.getElementById(`progressive-image-${index}`);
+            if (seg.imageSrc) {
+                tryLoadingImage(seg.imageSrc, targetContainer, seg.illustration, `Page ${index + 1} Illustration`);
+            } else {
+                targetContainer.innerHTML = seg.illustration;
             }
-        }
+        });
     }
 
     function renderExercises() {
@@ -795,9 +743,12 @@
                     correctCount++;
                 }
             } else if (ex.type === 'write') {
-                const answer = document.getElementById(`write-${exIdx}`).value.trim().toLowerCase();
-                if (answer === ex.correct.toLowerCase()) {
-                    correctCount++;
+                const answerInput = document.getElementById(`write-${exIdx}`);
+                if (answerInput) {
+                    const answer = answerInput.value.trim().toLowerCase();
+                    if (answer === ex.correct.toLowerCase()) {
+                        correctCount++;
+                    }
                 }
             }
         });
@@ -806,7 +757,7 @@
         if (percent === 100) {
             showToast("Excellent (Di'ak tebes!)", `You scored ${correctCount}/${totalCount} (100%)! Keep it up!`);
         } else if (percent >= 50) {
-            showToast("Good Effort (Koko di'ak!)", `You scored ${correctCount}/${totalCount} (${percent}%). Check your books and try again!`);
+            showToast("Good Effort (Koko di'ak!)", `You scored ${correctCount}/${totalCount} (${percent}%). Check your book and try again!`);
         } else {
             showToast("Try Again (Koko fali!)", `You scored ${correctCount}/${totalCount} (${percent}%). Study carefully and re-submit.`);
         }
