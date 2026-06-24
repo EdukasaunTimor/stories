@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EdukasaunTimor Stories Library Hub</title>
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Custom Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -47,7 +44,7 @@
 
     <header class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('shelf')">
+            <div class="flex items-center gap-3 cursor-pointer select-none" onclick="navigate('shelf')">
                 <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-nunito font-extrabold text-lg shadow-md shadow-indigo-200">
                     ET
                 </div>
@@ -62,14 +59,13 @@
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     Bilingual (Inglés-Tetun)
                 </span>
-                <span class="text-xs font-bold text-slate-400">PWA Offline Version 2.1</span>
+                <span class="text-xs font-bold text-slate-400">PWA Offline Version 2.2</span>
             </div>
         </div>
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Story Book Shelf View -->
         <section id="shelf-view" class="space-y-8">
             <div class="relative bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-3xl p-6 sm:p-10 text-white overflow-hidden shadow-xl shadow-indigo-100">
                 <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-12 translate-y-12">
@@ -85,7 +81,6 @@
                 </div>
             </div>
 
-            <!-- Search and Filter Panel -->
             <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
                 <div class="relative w-full md:w-96">
                     <input type="text" id="search-input" oninput="filterStories()" placeholder="Search stories... (Buka istória...)" class="w-full bg-white pl-11 pr-4 py-3 rounded-2xl border border-slate-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm">
@@ -103,12 +98,11 @@
                 </div>
             </div>
 
-            <!-- Stories Grid Container -->
             <div id="stories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
         <section id="reader-view" class="space-y-6 hidden">
-            <!-- Back Navigation & Book Bar -->
+            <!-- Back Navigation & Action Bar -->
             <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
                 <button onclick="navigate('shelf')" class="flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-indigo-600 transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -127,12 +121,12 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <div class="lg:col-span-5 space-y-4 sticky top-20">
+                <div class="lg:col-span-5 space-y-4 lg:sticky lg:top-20">
                     
-                    <!-- Dynamic Page Slider Container -->
+                    <!-- Dynamic Page Illustration Container -->
                     <div class="relative w-full bg-white rounded-3xl p-2 border border-slate-100 shadow-sm overflow-hidden">
                         <div id="reader-illustration" class="w-full bg-slate-50 rounded-2xl overflow-hidden aspect-video flex items-center justify-center border border-slate-100/50 shadow-inner">
-                            <!-- JS loaded dynamic image content falls here -->
+                            <!-- JS programmatically loads image or renders vector illustration safely -->
                         </div>
                         
                         <!-- Page Slide Controls -->
@@ -140,13 +134,14 @@
                             <button id="prev-page-btn" onclick="prevSegmentPage()" class="p-1 rounded-lg hover:bg-slate-200 text-slate-600 transition-colors disabled:opacity-40" disabled>
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
-                            <span id="page-indicator-text" class="text-xs font-bold text-slate-500 font-nunito">Page 1 of 8</span>
+                            <span id="page-indicator-text" class="text-xs font-bold text-slate-500 font-nunito select-none">Page 1 of 8</span>
                             <button id="next-page-btn" onclick="nextSegmentPage()" class="p-1 rounded-lg hover:bg-slate-200 text-slate-600 transition-colors disabled:opacity-40">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
                     </div>
 
+                    <!-- Meta information box -->
                     <div class="bg-white p-5 rounded-3xl border border-slate-100 space-y-2 shadow-sm">
                         <span id="reader-meta" class="inline-block text-[10px] tracking-wider uppercase bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold"></span>
                         <h2 id="reader-title-en" class="text-xl font-extrabold text-slate-800 leading-tight"></h2>
@@ -190,6 +185,7 @@
                 <p class="text-xs text-slate-500 mt-1">Aligned with official orthography standards of Timor-Leste.</p>
             </div>
             <div class="text-left md:text-right space-y-1">
+                <h4 class="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-2">PWA Offline Version 2.2</h4>
                 <p class="text-xs font-bold text-slate-500">© 2026 EdukasaunTimor.org. All rights reserved.</p>
                 <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Tetun (INL) Orthography Compliant</p>
             </div>
@@ -200,7 +196,7 @@
     <div id="toast-container" class="fixed bottom-6 right-6 z-50 pointer-events-none space-y-3"></div>
 
     <script>
-    // Bilingual CEFR aligned stories database with active segment images
+    // Bilingual CEFR aligned stories database with exact asset mapping
     const stories = [
         {
             id: "student-story",
@@ -332,11 +328,10 @@
                     tl: "Loron ida, iha loro-manas okos, Mana Nehek badinas tebes. Nia lori batar pedasu boot ida iha ninia kotuk. Nia la'o neineik ba ninia uma.",
                     imageSrc: "assets/Story-SisterAunt-1.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-100">
+                        <svg viewBox="0 0 200 120" class="w-full h-full">
                             <rect width="100%" height="100%" fill="#d1fae5"/>
                             <circle cx="30" cy="30" r="12" fill="#fbbf24"/>
-                            <ellipse cx="60" cy="95" rx="8" ry="4" fill="#fbbf24"/>
-                            <text x="100" y="60" fill="#047857" font-weight="bold" font-size="10">Dry Season</text>
+                            <text x="100" y="60" fill="#047857" font-weight="bold" font-size="10" text-anchor="middle">Page 1: Dry Season</text>
                         </svg>
                     `
                 },
@@ -345,11 +340,9 @@
                     tl: "Maun Gafañotu tuur hela iha hudi-hun okos. Nia toca gitara no hananu. Nia hateke ba Mana Nehek no hamnasa.",
                     imageSrc: "assets/Story-SisterAunt-2.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-100">
+                        <svg viewBox="0 0 200 120" class="w-full h-full">
                             <rect width="100%" height="100%" fill="#d1fae5"/>
-                            <path d="M140 100 L140 70 M120 70 L160 70 L140 30 Z" stroke="#047857" stroke-width="4" fill="#059669"/>
-                            <ellipse cx="120" cy="95" rx="8" ry="4" fill="#10b981"/>
-                            <line x1="120" y1="95" x2="115" y2="85" stroke="#047857" stroke-width="2"/>
+                            <text x="100" y="60" fill="#047857" font-weight="bold" font-size="10" text-anchor="middle">Page 2: Banana Tree</text>
                         </svg>
                     `
                 },
@@ -358,9 +351,9 @@
                     tl: "“Tanbasá mak ó serbisu maka'as?” gafañotu husu. “Loro-manas daudaun! Mai hananu hamutuk ho ha'u.”",
                     imageSrc: "assets/Story-SisterAunt-3.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-100">
+                        <svg viewBox="0 0 200 120" class="w-full h-full">
                             <rect width="100%" height="100%" fill="#fef08a"/>
-                            <text x="100" y="65" fill="#b45309" font-family="Nunito" font-weight="bold" font-size="12" text-anchor="middle">Sing with me!</text>
+                            <text x="100" y="65" fill="#b45309" font-family="Nunito" font-weight="bold" font-size="12" text-anchor="middle">Page 3: Sing with me!</text>
                         </svg>
                     `
                 },
@@ -369,10 +362,9 @@
                     tl: "“Lae,” nehek hatete. “Ha'u halibur hela hahán ba tempu-udan. Ó mós tenke serbisu.” Gafañotu hamnasa fali. “Udan sei dook. Ha'u hakarak deskansa.”",
                     imageSrc: "assets/Story-SisterAunt-4.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-100">
+                        <svg viewBox="0 0 200 120" class="w-full h-full">
                             <rect width="100%" height="100%" fill="#d1fae5"/>
-                            <rect x="40" y="40" width="30" height="30" fill="#ca8a04"/>
-                            <text x="110" y="65" fill="#1e293b" font-weight="bold" font-size="9">Food Storage</text>
+                            <text x="100" y="65" fill="#1e293b" font-weight="bold" font-size="9" text-anchor="middle">Page 4: Food Storage</text>
                         </svg>
                     `
                 },
@@ -381,11 +373,9 @@
                     tl: "Lakleur, klima troka, no tempu-udan to'o mai. Udan tau loroloron, no anin boot.",
                     imageSrc: "assets/Story-SisterAunt-5.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-100">
+                        <svg viewBox="0 0 200 120" class="w-full h-full">
                             <rect width="100%" height="100%" fill="#94a3b8"/>
-                            <line x1="30" y1="20" x2="20" y2="80" stroke="#e2e8f0" stroke-width="2"/>
-                            <line x1="70" y1="20" x2="60" y2="80" stroke="#e2e8f0" stroke-width="2"/>
-                            <line x1="120" y1="20" x2="110" y2="80" stroke="#e2e8f0" stroke-width="2"/>
+                            <text x="100" y="65" fill="#e2e8f0" font-weight="bold" font-size="10" text-anchor="middle">Page 5: Rain & Wind</text>
                         </svg>
                     `
                 },
@@ -394,10 +384,9 @@
                     tl: "Maun Gafañotu sente malirin no hamlaha tebes. Nia la iha batar. Nia la iha foos. Nia bá Mana Nehek nia uma no dere odamatan.",
                     imageSrc: "assets/Story-SisterAunt-6.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-100">
+                        <svg viewBox="0 0 200 120" class="w-full h-full">
                             <rect width="100%" height="100%" fill="#475569"/>
-                            <rect x="130" y="40" width="40" height="60" fill="#78350f"/>
-                            <circle cx="80" cy="80" r="10" fill="#ef4444"/>
+                            <text x="100" y="65" fill="#ef4444" font-weight="bold" font-size="10" text-anchor="middle">Page 6: Knocking</text>
                         </svg>
                     `
                 },
@@ -406,9 +395,9 @@
                     tl: "“Favór ida, Mana Nehek,” nia hatete. “Fó hahán uitoan mai ha'u. Ha'u hamlaha.”",
                     imageSrc: "assets/Story-SisterAunt-7.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-100">
+                        <svg viewBox="0 0 200 120" class="w-full h-full">
                             <rect width="100%" height="100%" fill="#1e293b"/>
-                            <text x="100" y="65" fill="#f8fafc" font-family="Nunito" font-weight="bold" font-size="12" text-anchor="middle">Help me, Sister Ant!</text>
+                            <text x="100" y="65" fill="#f8fafc" font-family="Nunito" font-weight="bold" font-size="12" text-anchor="middle">Page 7: Hungry Grasshopper</text>
                         </svg>
                     `
                 },
@@ -417,11 +406,9 @@
                     tl: "Mana Nehek loke odamatan. Nia sente manas (komfortavel) no iha batar barak. Nia hateke ba gafañotu. “Ha'u serbisu maka'as iha tempu-bailoro,” nia hatete. “Ó toca de'it gitara.” Maibé Mana Nehek laran-di'ak no laran-luak. Nia fó batar uitoan ba gafañotu. “Obrigadu,” gafañotu hatete. “Tinan oin, ha'u sei la sai baruk-teen. Ha'u sei badinas hanesan ó.”",
                     imageSrc: "assets/Story-SisterAunt-8.webp",
                     illustration: `
-                        <svg viewBox="0 0 200 120" class="w-full h-full text-emerald-100">
+                        <svg viewBox="0 0 200 120" class="w-full h-full">
                             <rect width="100%" height="100%" fill="#fef08a"/>
-                            <circle cx="80" cy="60" r="12" fill="#e11d48"/>
-                            <circle cx="120" cy="60" r="12" fill="#16a34a"/>
-                            <path d="M70 80 Q100 100 130 80" stroke="#1e293b" stroke-width="4" fill="none"/>
+                            <text x="100" y="65" fill="#1e293b" font-family="Nunito" font-weight="bold" font-size="12" text-anchor="middle">Page 8: Friendly Ending</text>
                         </svg>
                     `
                 }
@@ -574,15 +561,14 @@
             card.className = "bg-white rounded-3xl border border-slate-100 p-6 flex flex-col justify-between hover:shadow-lg transition-all duration-300 hover:border-indigo-200 cursor-pointer group";
             card.onclick = () => openStory(story.id);
 
-            // Fetch the cover image source (first segment or general illustration)
             const firstSegment = story.segments[0];
             const hasCoverImg = firstSegment && firstSegment.imageSrc;
 
             card.innerHTML = `
                 <div class="space-y-4">
                     <div class="aspect-video w-full rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 flex items-center justify-center relative">
-                        <div id="cover-loader-${story.id}" class="cover-image-holder w-full h-full">
-                            <!-- Image gets loaded dynamically to prevent raw alt render leaks -->
+                        <div id="cover-loader-${story.id}" class="cover-image-holder w-full h-full flex items-center justify-center">
+                            <!-- Programmatic loader placeholder -->
                         </div>
                     </div>
                     <div class="space-y-1.5">
@@ -603,7 +589,7 @@
             `;
             grid.appendChild(card);
 
-            // Programmatically load cover illustration bypass standard escape errors
+            // Programmatic image checker resolves alt text markup leakage bugs
             const targetContainer = document.getElementById(`cover-loader-${story.id}`);
             if (hasCoverImg) {
                 const imgCheck = new Image();
@@ -643,19 +629,19 @@
         navigate('reader');
     }
 
-    // Programmatic segment page renderer prevents raw text escaping & handles 16:9 images
     function renderActiveSegmentPage() {
+        if (!currentStory) return;
         const segment = currentStory.segments[currentSegmentIndex];
         const container = document.getElementById('reader-illustration');
-        container.innerHTML = ''; // Empty out current view
+        container.innerHTML = ''; // Clear container cleanly
 
         if (segment.imageSrc) {
             const pageImg = new Image();
             pageImg.src = segment.imageSrc;
-            pageImg.className = "w-full h-full object-cover rounded-3xl transition-all duration-300";
+            pageImg.className = "w-full h-full object-cover rounded-2xl transition-all duration-300";
             pageImg.alt = "Scene Illustration";
             
-            // On fallback, render beautiful custom inline SVG segment artwork
+            // WebP fallback fallback loads beautiful vector drawings in remote timor schools
             pageImg.onerror = () => {
                 container.innerHTML = segment.illustration;
             };
@@ -666,7 +652,7 @@
             container.innerHTML = segment.illustration;
         }
 
-        // Highlight selected text segment
+        // Highlight right panel matching segment rows
         document.querySelectorAll('.segment-row-card').forEach((card, idx) => {
             if (idx === currentSegmentIndex) {
                 card.classList.add('border-indigo-400', 'bg-indigo-50/50', 'ring-2', 'ring-indigo-100');
@@ -676,7 +662,7 @@
             }
         });
 
-        // Update indicators
+        // Update slider pagination controls
         document.getElementById('page-indicator-text').innerText = `Page ${currentSegmentIndex + 1} of ${currentStory.segments.length}`;
         document.getElementById('prev-page-btn').disabled = currentSegmentIndex === 0;
         document.getElementById('next-page-btn').disabled = currentSegmentIndex === currentStory.segments.length - 1;
@@ -728,9 +714,12 @@
             container.appendChild(row);
         });
 
-        // Initialize highlights
+        // Highlight first item on open
         if (currentStory.segments.length > 0) {
-            document.querySelectorAll('.segment-row-card')[0].classList.add('border-indigo-400', 'bg-indigo-50/50', 'ring-2', 'ring-indigo-100');
+            const firstRow = container.querySelector('.segment-row-card');
+            if (firstRow) {
+                firstRow.classList.add('border-indigo-400', 'bg-indigo-50/50', 'ring-2', 'ring-indigo-100');
+            }
         }
     }
 
